@@ -119,8 +119,8 @@
       display:flex; align-items:center; justify-content:center;
     }
     .logo-mark svg { width:22px; height:22px; fill:rgb(173, 143, 60); }
-    .logo-text strong { font-family:var(--ff-h); font-size:20px; font-weight:900; color: blue; display:block; }
-    .logo-text em { font-style:normal; font-size:10px; font-weight:700; color: orangered; letter-spacing:1.2px; text-transform:uppercase; }
+    .logo-text strong { font-family:var(--ff-h); font-size:20px; font-weight:900; color: blue; display:block; letter-spacing: -1px; }
+    .logo-text em { font-style:italic; font-size:10px; font-weight:700; color: orangered; letter-spacing:1.8px; text-transform:uppercase; }
 
     .nav-search {
       flex:1; max-width:420px;
@@ -176,10 +176,8 @@
     .mobile-menu .nav-call { margin-top:8px; justify-content:center; }
 
     /* ════════════════ HERO ════════════════ */
-    .hero {
-      background:white; padding:64px 0 0;
-      position:relative; overflow:hidden;
-    }
+    
+    
     .hero::before {
       content:''; position:absolute; bottom:0; left:0; right:0;
       height:280px;
@@ -728,7 +726,27 @@
       .app-inner { grid-template-columns:1fr; }
       .app-right { display:none; }
     }
-    @media (max-width:768px) {
+
+
+    @media (max-width:768px){
+
+    .hero-trust{
+        display:flex;
+        flex-direction:column;
+        align-items:flex-start;
+        gap:15px;
+        width:fit-content;
+        margin:20px auto;
+    }
+
+    .hero-trust span{
+        display:flex;
+        align-items:center;
+        gap:10px;
+        width:100%;
+    }
+
+}
       .topbar-right { display:none; }
       .nav-search { display:none; }
       .nav-links { display:none; }
@@ -805,7 +823,7 @@
       <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
     </button>
     <div style="display:inline-flex;align-items:center;gap:7px;background:var(--brand-light);color:var(--brand);font-size:12px;font-weight:700;padding:5px 14px;border-radius:var(--r-full);margin-bottom:16px;letter-spacing:.5px;text-transform:uppercase">
-      ⚡ Free Inspection Today
+      ⚡ Inspection Today
     </div>
     <h3>Get a Quick Quote</h3>
     <p>Tell us what's broken — we'll fix it same day!</p>
@@ -838,30 +856,8 @@
       </select>
     </div>
     <div class="form-group"><label>Address (optional)</label><input type="text" placeholder="Coimbatore, Chennai, Madurai, Tirupur, Erode."></div>
-    <button class="form-submit" onclick="alert('Thank you! Our team will call you in 15 minutes. ☎️')">Book Free Inspection →</button>
+    <button class="form-submit" onclick="alert('Thank you! Our team will call you in 15 minutes. ☎️')">Book Inspection →</button>
     <p style="text-align:center;font-size:12px;color:var(--text-muted);margin-top:12px">🔒 No spam · 100% Free Inspection · 90-Day Warranty</p>
-  </div>
-</div>
-
-<!-- ════════════════════════════════════════
-  TOPBAR
-════════════════════════════════════════ -->
-<div class="topbar">
-  <div class="topbar-inner">
-    <div style="display:flex;gap:24px;flex-wrap:wrap">
-      <div class="tb-item">
-        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-        Coimbatore, Tamil Nadu
-      </div>
-      <div class="tb-item">
-        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
-        24×7 Emergency Service Available
-      </div>
-    </div>
-    <div class="tb-right">
-      <div class="tb-item"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg> Rated 4.9 by 3,200+ Customers</div>
-      <span class="tb-badge">FREE Inspection</span>
-    </div>
   </div>
 </div>
 
@@ -875,9 +871,9 @@
       <div class="logo-text">
         <strong>
   <span style="color:blue;">Fix</span>
-  <span style="color:orange;">Now</span>
+  <span style="color:rgb(240, 70, 18);">Now</span>
 </strong>
-        <em> Coimbatore</em>
+        <em id="cityText">Coimbatore</em>
       </div>
     </a>
 
@@ -923,7 +919,7 @@
     <div class="hero-top reveal">
       <div class="hero-badge">
         <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-        Coimbatore's #1 Appliance Repair Service
+        People's #1 Appliance Repair Service
       </div>
       <h1>Your Home Deserves<br><span class="accent">Expert Care</span></h1>
       <p class="hero-sub">Professional AC, Washing Machine, Refrigerator & all home appliance repairs. Certified technicians at your door in 60 minutes.</p>
@@ -1803,6 +1799,58 @@ Cooling Efficiency Testing</div>
   document.getElementById('searchInput').addEventListener('keypress', e => {
     if (e.key === 'Enter') openPopup();
   });
+</script>
+<script>
+const cities = [
+  "Coimbatore",
+  "Chennai",
+  "Madurai",
+  "Tirupur",
+  "Erode"
+];
+
+let cityIndex = 0;
+
+setInterval(function () {
+  cityIndex++;
+
+  if(cityIndex >= cities.length){
+    cityIndex = 0;
+  }
+
+  document.getElementById("cityText").innerText = cities[cityIndex];
+
+}, 2000);
+</script>
+<script>
+const texts = [
+  "Search for AC Repair...",
+  "Search for Washing Machine Repair...",
+  "Search for Refrigerator Repair...",
+  "Search for Water Heater Repair..."
+];
+
+let textIndex = 0;
+let charIndex = 0;
+const input = document.getElementById("searchInput");
+
+function typeEffect() {
+  if (charIndex < texts[textIndex].length) {
+    input.placeholder += texts[textIndex].charAt(charIndex);
+    charIndex++;
+    setTimeout(typeEffect, 80);
+  } else {
+    setTimeout(() => {
+      input.placeholder = "";
+      charIndex = 0;
+      textIndex = (textIndex + 1) % texts.length;
+      typeEffect();
+    }, 2000);
+  }
+}
+
+input.placeholder = "";
+typeEffect();
 </script>
 </body>
 </html>
