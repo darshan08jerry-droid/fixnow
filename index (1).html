@@ -18,7 +18,7 @@
       --brand-pale:  #ffd152d7;
       --navy:        #25242b;
       --navy-2:      #2D2D44;
-      --blue:        #2563EB;
+      --blue:        #2563EB;`
       --blue-light:  #EFF4FF;
       --green:       #16A34A;
       --green-light: #F0FDF4;
@@ -176,14 +176,82 @@
     .mobile-menu .nav-call { margin-top:8px; justify-content:center; }
 
     /* ════════════════ HERO ════════════════ */
-    
-    
-    .hero::before {
-      content:''; position:absolute; bottom:0; left:0; right:0;
-      height:280px;
-      background:linear-gradient(to bottom, white, var(--brand-pale));
-      pointer-events:none;
+
+    .hero {
+      position:relative;
+      overflow:hidden;
+      padding:80px 0 0;
+      min-height:100vh;
     }
+
+    /* ── Background Image Slider ── */
+    .hero-slider {
+      position:absolute;
+      inset:0;
+      z-index:0;
+    }
+    .hs-slide {
+      position:absolute;
+      inset:0;
+      background-size:cover;
+      background-position:center center;
+      opacity:0;
+      transition:opacity 1.5s ease-in-out;
+      transform:scale(1.03);
+      animation:none;
+    }
+    .hs-slide.active {
+      opacity:1;
+      animation:hsZoom 8s ease-in-out forwards;
+    }
+    @keyframes hsZoom {
+      from { transform:scale(1.06); }
+      to   { transform:scale(1.00); }
+    }
+
+    /* ← Put your 5 image file names below */
+    .hs-slide-1 { background-image:url('slide1.png'); }
+    .hs-slide-2 { background-image:url('slide2.jpg'); }
+    .hs-slide-3 { background-image:url('slide3.jpg'); }
+    .hs-slide-4 { background-image:url('slide4.jpg'); }
+    .hs-slide-5 { background-image:url('slide5.jpg'); }
+
+    /* ── Light overlay so dark text stays readable ── */
+    .hero-overlay {
+      position:absolute;
+      inset:0;
+      background: rgba(0,0,0,.52)
+        to bottom,
+        rgba(255,255,255,0.87) 0%,
+        rgba(255,255,255,0.80) 55%,
+        rgba(255,209,82,0.90)  100%
+      );
+      z-index:1;
+    }
+
+    /* ── Slider dots ── */
+    .hs-dots {
+      position:absolute;
+      bottom:24px;
+      left:50%;
+      transform:translateX(-50%);
+      display:flex;
+      gap:8px;
+      z-index:3;
+    }
+    .hs-dot {
+      width:9px; height:9px;
+      border-radius:50%;
+      background:rgba(0,0,0,0.25);
+      cursor:pointer;
+      transition:background .3s, transform .3s;
+      border:none;
+    }
+    .hs-dot.active {
+      background:var(--brand);
+      transform:scale(1.4);
+    }
+
     .hero-inner {
       max-width:var(--max); margin:auto; padding:0 24px;
       position:relative; z-index:2;
@@ -193,7 +261,7 @@
     }
     .hero-badge {
       display:inline-flex; align-items:center; gap:7px;
-      background:var(--brand-light); border:1px solid rgba(232,82,26,.2);
+      background:#fff; border:1px solid rgba(255,209,26,.2);
       color:var(--brand); font-size:12.5px; font-weight:700;
       padding:6px 16px; border-radius:var(--r-full);
       margin-bottom:22px; letter-spacing:.4px;
@@ -201,18 +269,18 @@
     .hero-badge svg { width:12px; height:12px; fill:currentColor; }
     .hero h1 {
       font-family:var(--ff-h); font-size:clamp(32px, 5vw, 58px);
-      font-weight:900; color:var(--navy); line-height:1.1;
+      font-weight:900; color:#ffffff; line-height:1.1;
       margin-bottom:18px; letter-spacing:-.5px;
     }
-    .hero h1 .accent { color:var(--brand); }
+    .hero h1 .accent { color:#FFD152; }
     .hero-sub {
-      font-size:17px; color:var(--text-soft); line-height:1.65;
+      font-size:17px; color:rgba(255,255,255,0.88); line-height:1.65;
       margin-bottom:36px; max-width:520px; margin-left:auto; margin-right:auto;
     }
     .hero-ctas { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-bottom:36px; }
     .btn-primary {
       display:inline-flex; align-items:center; gap:8px;
-      background:var(--brand); color:white; padding:14px 28px;
+      background:#111111; color:white; padding:14px 28px;
       border-radius:var(--r-full); font-size:15px; font-weight:700;
       box-shadow:var(--sh-brand); transition:transform var(--t), box-shadow var(--t);
     }
@@ -230,7 +298,7 @@
 
     .hero-trust {
       display:flex; gap:24px; justify-content:center; flex-wrap:wrap;
-      font-size:13px; color:var(--text-soft); margin-bottom:52px;
+      font-size:13px; color:rgba(255,255,255,0.85); margin-bottom:52px;
     }
     .hero-trust span { display:flex; align-items:center; gap:6px; }
     .hero-trust svg { width:14px; height:14px; fill:var(--brand); }
@@ -895,6 +963,24 @@
   HERO + SERVICES
 ════════════════════════════════════════ -->
 <section class="hero" id="home">
+
+  <!-- ═══ BACKGROUND IMAGE SLIDER ═══ -->
+  <div class="hero-slider" id="heroSlider">
+    <div class="hs-slide hs-slide-1 active"></div>
+    <div class="hs-slide hs-slide-2"></div>
+    <div class="hs-slide hs-slide-3"></div>
+    <div class="hs-slide hs-slide-4"></div>
+    <div class="hs-slide hs-slide-5"></div>
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hs-dots">
+    <button class="hs-dot active" onclick="goHeroSlide(0)"></button>
+    <button class="hs-dot" onclick="goHeroSlide(1)"></button>
+    <button class="hs-dot" onclick="goHeroSlide(2)"></button>
+    <button class="hs-dot" onclick="goHeroSlide(3)"></button>
+    <button class="hs-dot" onclick="goHeroSlide(4)"></button>
+  </div>
+
   <div class="hero-inner">
     <div class="hero-top reveal">
       <div class="hero-badge">
@@ -1697,7 +1783,26 @@ Cooling Efficiency Testing</div>
   JAVASCRIPT
 ════════════════════════════════════════ -->
 <script>
-  /* LOADER */
+  /* ════ HERO BACKGROUND SLIDER ════ */
+  let heroSlide = 0;
+  const HS_TOTAL = 5;
+  const hsSlides = document.querySelectorAll('.hs-slide');
+  const hsDots   = document.querySelectorAll('.hs-dot');
+  let hsAuto;
+
+  function goHeroSlide(n) {
+    hsSlides[heroSlide].classList.remove('active');
+    hsDots[heroSlide].classList.remove('active');
+    heroSlide = ((n % HS_TOTAL) + HS_TOTAL) % HS_TOTAL;
+    hsSlides[heroSlide].classList.add('active');
+    hsDots[heroSlide].classList.add('active');
+    clearInterval(hsAuto);
+    hsAuto = setInterval(() => goHeroSlide(heroSlide + 1), 5000);
+  }
+
+  hsAuto = setInterval(() => goHeroSlide(heroSlide + 1), 5000);
+
+
   window.addEventListener('load', () => {
     setTimeout(() => document.getElementById('loader').classList.add('gone'), 1500);
   });
