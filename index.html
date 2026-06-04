@@ -197,7 +197,7 @@
       background-position:center center;
       opacity:0;
       transition:opacity 1.5s ease-in-out;
-      transform:scale(1.03);
+      transform:none;
       animation:none;
     }
     .hs-slide.active {
@@ -811,7 +811,9 @@
       .why-cards { grid-template-columns:1fr; }
       .stats-inner { grid-template-columns:repeat(2,1fr); }
       .footer-bottom { flex-direction:column; align-items:center; text-align:center; }
-      .hero { padding:40px 0 0; }
+      .hero { padding:30px 0 0; min-height:100svh; }
+      .hs-slide { transform:none !important; background-position:center center; }
+      .hs-slide.active { animation:none !important; transform:none !important; }
       .hiw-grid { grid-template-columns:1fr; }
       .hiw-connector { display:none; }
       .app-btns { flex-direction:column; }
