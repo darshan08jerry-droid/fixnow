@@ -18,7 +18,7 @@
       --brand-pale:  #ffd152d7;
       --navy:        #25242b;
       --navy-2:      #2D2D44;
-      --blue:        #2563EB;`
+      --blue:        #2563EB;
       --blue-light:  #EFF4FF;
       --green:       #16A34A;
       --green-light: #F0FDF4;
@@ -225,7 +225,7 @@
         rgba(255,255,255,0.87) 0%,
         rgba(255,255,255,0.80) 55%,
         rgba(255,209,82,0.90)  100%
-      );
+      ;
       z-index:1;
     }
 
@@ -454,7 +454,9 @@
     /* ════════════════ WHY US ════════════════ */
     .why-section { padding:80px 0; background:white; }
     .why-inner { max-width:var(--max); margin:auto; padding:0 24px; display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center; }
-    .why-left { }
+    .why-left{
+  flex:1;
+}
     .why-cards { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:40px; }
     .why-card {
       background:var(--g-50); border-radius:var(--r-lg); padding:24px;
@@ -794,140 +796,35 @@
       .app-inner { grid-template-columns:1fr; }
       .app-right { display:none; }
     }
-
     @media (max-width:768px) {
-      /* ── Body padding so content isn't hidden behind sticky CTA ── */
-      body { padding-bottom:64px; }
-
-      /* ── Topbar: hide entirely on mobile ── */
-      .topbar { display:none; }
-
-      /* ── Nav ── */
+      .topbar-right { display:none; }
       .nav-search { display:none; }
       .nav-links { display:none; }
       .hamburger { display:flex; }
-      .nav-inner { height:60px; }
-
-      /* ── Section paddings: reduce 80px → 48px ── */
-      .section,
-      .why-section,
-      .testi-section,
-      .faq-section,
-      .app-section,
-      .pricing-section,
-      .pop-section { padding:48px 0; }
-      .stats-row { padding:24px 0; }
-      .contact-band { padding:24px 0; }
-      footer { padding:40px 0 0; }
-      .footer-bottom { margin-top:32px; }
-
-      /* ── Hero ── */
+      .services-grid { grid-template-columns:repeat(4,1fr); }
+      .services-grid-wrap { padding:28px 20px 36px; }
+      .trust-inner { grid-template-columns:repeat(2,1fr); }
+      .pop-grid { grid-template-columns:1fr; }
+      .testi-slide { grid-template-columns:1fr; }
+      .footer-inner { grid-template-columns:1fr; }
+      .fab-group { display:none; }
+      .sticky-mobile { display:block; }
+      .contact-inner { flex-direction:column; align-items:flex-start; }
+      .why-cards { grid-template-columns:1fr; }
+      .stats-inner { grid-template-columns:repeat(2,1fr); }
+      .footer-bottom { flex-direction:column; align-items:center; text-align:center; }
       .hero { padding:30px 0 0; min-height:100svh; }
       .hs-slide { transform:none !important; background-position:center center; }
       .hs-slide.active { animation:none !important; transform:none !important; }
-      .hero-top { margin-bottom:32px; }
-      .hero-sub { font-size:15px; }
-      .hero-trust { gap:12px; }
-
-      /* ── Services ── */
-      .services-grid { grid-template-columns:repeat(4,1fr); }
-      .services-grid-wrap { padding:24px 16px 32px; }
-      .svc-icon { width:60px; height:60px; font-size:22px; }
-      .svc-label { font-size:11.5px; }
-      .svc-sub { font-size:10px; }
-
-      /* ── Trust strip ── */
-      .trust-inner { grid-template-columns:repeat(2,1fr); gap:16px; }
-      .trust-num { font-size:26px; }
-      .trust-label { font-size:12px; }
-      .trust-divider { display:none; }
-
-      /* ── Stats row ── */
-      .stats-inner { grid-template-columns:repeat(2,1fr); gap:16px; }
-      .stat-num { font-size:30px; }
-
-      /* ── How it works ── */
       .hiw-grid { grid-template-columns:1fr; }
       .hiw-connector { display:none; }
-
-      /* ── Popular services ── */
-      .pop-grid { grid-template-columns:1fr; }
-
-      /* ── Why us ── */
-      .why-inner { gap:28px; }
-      .why-cards { grid-template-columns:1fr; }
-
-      /* ── Pricing ── */
-      .plans-grid { max-width:100%; padding:0 24px; }
-      .plan-card { padding:28px 22px; }
-
-      /* ── Testimonials ── */
-      .testi-slide { grid-template-columns:1fr; }
-
-      /* ── App section ── */
       .app-btns { flex-direction:column; }
-
-      /* ── Contact band ── */
-      .contact-inner { flex-direction:column; align-items:flex-start; gap:18px; }
-      .contact-text h3 { font-size:20px; }
-      .contact-actions { width:100%; flex-direction:column; }
-      .cb-btn { width:100%; justify-content:center; }
-
-      /* ── Footer ── */
-      .footer-inner { grid-template-columns:1fr; gap:28px; }
-      .footer-bottom { flex-direction:column; align-items:center; text-align:center; }
-      .footer-badges { justify-content:center; }
-
-      /* ── FABs & sticky ── */
-      .fab-group { display:none; }
-      .sticky-mobile { display:block; }
-
-      /* ── Popup ── */
-      .popup { padding:28px 20px; border-radius:var(--r-lg); }
     }
-
     @media (max-width:480px) {
-      /* ── Reduce paddings further ── */
-      .section,
-      .why-section,
-      .testi-section,
-      .faq-section,
-      .app-section,
-      .pricing-section,
-      .pop-section { padding:40px 0; }
-
-      /* ── Services: 4 cols with tiny icons ── */
-      .services-grid { grid-template-columns:repeat(4,1fr); gap:6px; }
-      .svc-icon { width:50px; height:50px; font-size:18px; border-radius:var(--r-sm); }
-      .svc-label { font-size:10px; }
-      .svc-sub { display:none; }
-      .svc-card { padding:14px 4px; gap:6px; }
-
-      /* ── Hero ── */
+      .services-grid { grid-template-columns:repeat(3,1fr); }
       .hero-ctas { flex-direction:column; align-items:center; }
-      .btn-primary, .btn-secondary { width:100%; max-width:300px; justify-content:center; }
-      .hero-trust { flex-direction:column; align-items:center; gap:10px; }
-      .hero-badge { font-size:11.5px; }
-
-      /* ── Trust strip ── */
-      .trust-num { font-size:22px; }
-
-      /* ── Stats ── */
-      .stat-num { font-size:26px; }
-
-      /* ── Section text ── */
-      .section-p { font-size:14.5px; }
-
-      /* ── Plan cards ── */
-      .plan-card { padding:24px 18px; }
-      .plan-price { font-size:36px; }
-
-      /* ── Form ── */
       .form-row { grid-template-columns:1fr; }
-      .popup { padding:20px 16px; }
-
-      /* ── Footer badges wrap smaller ── */
-      .f-badge { font-size:10.5px; padding:3px 10px; }
+      .hero-trust { flex-direction:column; align-items:center; }
     }
   </style>
 </head>
