@@ -884,12 +884,12 @@
     <h3>Get a Quick Quote</h3>
     <p>Tell us what's broken — we'll fix it same day!</p>
     <div class="form-row">
-      <div class="form-group"><label>Your Name</label><input type="text" placeholder="e.g. Ravi Kumar"></div>
-      <div class="form-group"><label>Phone Number</label><input type="tel" placeholder="+91 98765 43210"></div>
+      <div class="form-group"><label>Your Name</label><input type="text" id="qName" placeholder="e.g. Ravi Kumar"></div>
+      <div class="form-group"><label>Phone Number</label><input type="tel" id="qPhone" placeholder="+91 98765 43210"></div>
     </div>
     <div class="form-group">
       <label>Service Needed</label>
-      <select>
+      <select id="qService">
         <option value="">Choose a service…</option>
         <option>AC Repair & Cleaning</option>
         <option>AC Installation</option>
@@ -903,7 +903,7 @@
     </div>
     <div class="form-group">
       <label>Preferred Time</label>
-      <select>
+      <select id="qTime">
         <option value="">Select slot…</option>
         <option>Today – Morning (8AM – 12PM)</option>
         <option>Today – Afternoon (12PM – 4PM)</option>
@@ -911,9 +911,9 @@
         <option>Tomorrow – Any Time</option>
       </select>
     </div>
-    <div class="form-group"><label>Address (optional)</label><input type="text" placeholder="Coimbatore, Chennai, Madurai, Tirupur, Erode."></div>
-    <button class="form-submit" onclick="alert('Thank you! Our team will call you in 15 minutes. ☎️')">Book Inspection →</button>
-    <p style="text-align:center;font-size:12px;color:var(--text-muted);margin-top:12px">🔒 No spam · 100% Free Inspection · 90-Day Warranty</p>
+    <div class="form-group"><label>Address (optional)</label><input type="text" id="qAddress" placeholder="Coimbatore, Chennai, Madurai, Tirupur, Erode."></div>
+    <button class="form-submit" id="qSubmitBtn" onclick="submitQuote()">Book Inspection →</button>
+    <p id="qStatus" style="text-align:center;font-size:12px;color:var(--text-muted);margin-top:12px">🔒 No spam · 100% Free Inspection · 90-Day Warranty</p>
   </div>
 </div>
 
@@ -1891,6 +1891,66 @@ Cooling Efficiency Testing</div>
   document.getElementById('searchInput').addEventListener('keypress', e => {
     if (e.key === 'Enter') openPopup();
   });
+
+  /* ════ QUICK QUOTE FORM → GOOGLE SHEET ════ */
+  // PASTE your Google Apps Script Web App URL below (see setup guide).
+  const QUOTE_SHEET_URL = "https://script.google.com/macros/s/AKfycbwqmR-kETEiYdYhEjE_Ktv1079ZYwdBjqciOu027awlCLtzDO984tFt-_NlGJJM_RJnQg/exec";
+
+  function submitQuote() {
+    const name    = document.getElementById('qName').value.trim();
+    const phone   = document.getElementById('qPhone').value.trim();
+    const service = document.getElementById('qService').value;
+    const time    = document.getElementById('qTime').value;
+    const address = document.getElementById('qAddress').value.trim();
+    const status  = document.getElementById('qStatus');
+    const btn     = document.getElementById('qSubmitBtn');
+
+    if (!name || !phone || !service) {
+      status.textContent = '⚠️ Please fill your name, phone, and service.';
+      status.style.color = '#C43F0E';
+      return;
+    }
+
+    if (QUOTE_SHEET_URL.includes('PASTE_YOUR')) {
+      status.textContent = '⚠️ Backend not connected yet — see setup guide.';
+      status.style.color = '#C43F0E';
+      return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+    status.textContent = '';
+
+    fetch(QUOTE_SHEET_URL, {
+      method: 'POST',
+      mode: 'no-cors', // Apps Script doesn't send CORS headers back; this lets the request go through
+      body: JSON.stringify({ name, phone, service, time, address, page: location.href }),
+      headers: { 'Content-Type': 'text/plain' } // avoids CORS preflight on Apps Script
+    })
+      .then(() => {
+        status.textContent = '✅ Thank you! Our team will call you in 15 minutes. ☎️';
+        status.style.color = 'var(--green)';
+        btn.textContent = 'Booked ✓';
+        setTimeout(() => {
+          closePopup();
+          document.getElementById('qName').value = '';
+          document.getElementById('qPhone').value = '';
+          document.getElementById('qService').value = '';
+          document.getElementById('qTime').value = '';
+          document.getElementById('qAddress').value = '';
+          btn.disabled = false;
+          btn.textContent = 'Book Inspection →';
+          status.textContent = '🔒 No spam · 100% Free Inspection · 90-Day Warranty';
+          status.style.color = 'var(--text-muted)';
+        }, 1800);
+      })
+      .catch(() => {
+        status.textContent = '❌ Something went wrong. Please call us directly.';
+        status.style.color = '#C43F0E';
+        btn.disabled = false;
+        btn.textContent = 'Book Inspection →';
+      });
+  }
 </script>
 <script>
 const cities = [
