@@ -912,6 +912,15 @@
       </select>
     </div>
     <div class="form-group"><label>Address (optional)</label><input type="text" id="qAddress" placeholder="Coimbatore, Chennai, Madurai, Tirupur, Erode."></div>
+    <div class="form-group">
+      <label id="qCaptchaLabel">Quick check — what is 3 + 4?</label>
+      <input type="text" id="qCaptcha" placeholder="Type the answer" inputmode="numeric">
+    </div>
+    <!-- Honeypot: hidden from real users, bots often fill it. Leave this untouched. -->
+    <div style="position:absolute;left:-9999px;opacity:0;height:0;overflow:hidden" aria-hidden="true">
+      <label>Leave this field empty</label>
+      <input type="text" id="qWebsite" name="website" tabindex="-1" autocomplete="off">
+    </div>
     <button class="form-submit" id="qSubmitBtn" onclick="submitQuote()">Book Inspection →</button>
     <p id="qStatus" style="text-align:center;font-size:12px;color:var(--text-muted);margin-top:12px">🔒 No spam · 100% Free Inspection · 90-Day Warranty</p>
   </div>
@@ -1832,7 +1841,17 @@ Cooling Efficiency Testing</div>
   }
 
   /* POPUP */
-  function openPopup() { document.getElementById('overlay').classList.add('open'); }
+  let qCaptchaAnswer = 0;
+  function newCaptcha() {
+    const a = Math.floor(Math.random() * 6) + 2; // 2-7
+    const b = Math.floor(Math.random() * 6) + 2; // 2-7
+    qCaptchaAnswer = a + b;
+    const label = document.getElementById('qCaptchaLabel');
+    const input = document.getElementById('qCaptcha');
+    if (label) label.textContent = `Quick check — what is ${a} + ${b}?`;
+    if (input) input.value = '';
+  }
+  function openPopup() { document.getElementById('overlay').classList.add('open'); newCaptcha(); }
   function closePopup() { document.getElementById('overlay').classList.remove('open'); }
   setTimeout(openPopup, 20000);
 
@@ -1902,12 +1921,28 @@ Cooling Efficiency Testing</div>
     const service = document.getElementById('qService').value;
     const time    = document.getElementById('qTime').value;
     const address = document.getElementById('qAddress').value.trim();
+    const captcha = document.getElementById('qCaptcha').value.trim();
+    const honeypot = document.getElementById('qWebsite').value.trim();
     const status  = document.getElementById('qStatus');
     const btn     = document.getElementById('qSubmitBtn');
+
+    // Honeypot: real users never fill this. If it has a value, it's a bot — fail silently.
+    if (honeypot) {
+      status.textContent = '✅ Thank you! Our team will call you in 15 minutes. ☎️';
+      status.style.color = 'var(--green)';
+      return;
+    }
 
     if (!name || !phone || !service) {
       status.textContent = '⚠️ Please fill your name, phone, and service.';
       status.style.color = '#C43F0E';
+      return;
+    }
+
+    if (parseInt(captcha, 10) !== qCaptchaAnswer) {
+      status.textContent = '⚠️ Wrong answer to the quick check — please try again.';
+      status.style.color = '#C43F0E';
+      newCaptcha();
       return;
     }
 
@@ -1963,6 +1998,7 @@ Cooling Efficiency Testing</div>
         document.getElementById('qService').value = '';
         document.getElementById('qTime').value = '';
         document.getElementById('qAddress').value = '';
+        newCaptcha();
         btn.disabled = false;
         btn.textContent = 'Book Inspection →';
         status.textContent = '🔒 No spam · 100% Free Inspection · 90-Day Warranty';
