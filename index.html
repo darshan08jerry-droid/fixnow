@@ -1921,35 +1921,54 @@ Cooling Efficiency Testing</div>
     btn.textContent = 'Sending…';
     status.textContent = '';
 
-    fetch(QUOTE_SHEET_URL, {
-      method: 'POST',
-      mode: 'no-cors', // Apps Script doesn't send CORS headers back; this lets the request go through
-      body: JSON.stringify({ name, phone, service, time, address, page: location.href }),
-      headers: { 'Content-Type': 'text/plain' } // avoids CORS preflight on Apps Script
-    })
-      .then(() => {
-        status.textContent = '✅ Thank you! Our team will call you in 15 minutes. ☎️';
-        status.style.color = 'var(--green)';
-        btn.textContent = 'Booked ✓';
-        setTimeout(() => {
-          closePopup();
-          document.getElementById('qName').value = '';
-          document.getElementById('qPhone').value = '';
-          document.getElementById('qService').value = '';
-          document.getElementById('qTime').value = '';
-          document.getElementById('qAddress').value = '';
-          btn.disabled = false;
-          btn.textContent = 'Book Inspection →';
-          status.textContent = '🔒 No spam · 100% Free Inspection · 90-Day Warranty';
-          status.style.color = 'var(--text-muted)';
-        }, 1800);
-      })
-      .catch(() => {
-        status.textContent = '❌ Something went wrong. Please call us directly.';
-        status.style.color = '#C43F0E';
+    // Reliable method: submit a real hidden form to a hidden iframe.
+    // (fetch() with no-cors can silently drop data due to Apps Script's internal redirect —
+    // a real form POST avoids that entirely.)
+    let iframe = document.getElementById('qHiddenFrame');
+    if (!iframe) {
+      iframe = document.createElement('iframe');
+      iframe.name = 'qHiddenFrame';
+      iframe.id = 'qHiddenFrame';
+      iframe.style.display = 'none';
+      document.body.appendChild(iframe);
+    }
+
+    const form = document.createElement('form');
+    form.action = QUOTE_SHEET_URL;
+    form.method = 'POST';
+    form.target = 'qHiddenFrame';
+
+    const fields = { name, phone, service, time, address, page: location.href };
+    Object.keys(fields).forEach(key => {
+      const input = document.createElement('input');
+      input.type = 'hidden';
+      input.name = key;
+      input.value = fields[key];
+      form.appendChild(input);
+    });
+
+    document.body.appendChild(form);
+    form.submit();
+    document.body.removeChild(form);
+
+    // We can't read the iframe's cross-origin response, so we optimistically confirm.
+    setTimeout(() => {
+      status.textContent = '✅ Thank you! Our team will call you in 15 minutes. ☎️';
+      status.style.color = 'var(--green)';
+      btn.textContent = 'Booked ✓';
+      setTimeout(() => {
+        closePopup();
+        document.getElementById('qName').value = '';
+        document.getElementById('qPhone').value = '';
+        document.getElementById('qService').value = '';
+        document.getElementById('qTime').value = '';
+        document.getElementById('qAddress').value = '';
         btn.disabled = false;
         btn.textContent = 'Book Inspection →';
-      });
+        status.textContent = '🔒 No spam · 100% Free Inspection · 90-Day Warranty';
+        status.style.color = 'var(--text-muted)';
+      }, 1800);
+    }, 900);
   }
 </script>
 <script>
