@@ -772,6 +772,8 @@
       border-color:var(--brand); box-shadow:0 0 0 3px rgba(232,82,26,.1);
     }
     .form-row { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    .form-row .form-group { min-width:0; }
+    .form-group input, .form-group select, .form-group textarea { width:100%; min-width:0; box-sizing:border-box; }
     .form-submit {
       width:100%; padding:14px; background:var(--brand); color:white;
       border-radius:var(--r-full); font-size:15px; font-weight:700;
@@ -820,9 +822,15 @@
       .hero { padding:30px 0 0; min-height:100svh; }
       .hs-slide { transform:none !important; background-position:center center; }
       .hs-slide.active { animation:none !important; transform:none !important; }
+      .hero-slider { background:var(--navy); }
+      .hs-slide { background-size:contain !important; background-repeat:no-repeat; background-color:var(--navy); }
       .hiw-grid { grid-template-columns:1fr; }
       .hiw-connector { display:none; }
       .app-btns { flex-direction:column; }
+      .popup { padding:24px 20px; width:92%; }
+    }
+    @media (max-width:480px) {
+      .form-row { grid-template-columns:1fr; }
     }
     .services-grid{
     width:100%;
