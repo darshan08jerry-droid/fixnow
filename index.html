@@ -213,6 +213,54 @@
       .hero-col-left .hero-trust { justify-content:center; }
     }
 
+    /* ── Location / ETA bar (UC style) ── */
+    .hero-loc-bar {
+      display:inline-flex; align-items:center; gap:8px;
+      background:rgba(255,255,255,.55); border:1px solid rgba(0,0,0,.06);
+      border-radius:var(--r-full); padding:7px 16px; margin-bottom:16px;
+      font-size:12.5px; font-weight:700; color:var(--navy);
+    }
+    .hero-loc-bar svg { width:14px; height:14px; fill:var(--brand-dark); flex-shrink:0; }
+    .hero-col-left .hero-loc-bar { justify-content:flex-start; }
+
+    /* ── Category icon row (UC style) ── */
+    .hero-cats {
+      display:grid; grid-template-columns:repeat(4,1fr); gap:14px;
+      max-width:520px; margin:0 0 26px;
+    }
+    .hero-cat {
+      display:flex; flex-direction:column; align-items:center; gap:8px;
+      cursor:pointer; text-align:center;
+    }
+    .hero-cat-icon {
+      width:100%; aspect-ratio:1; border-radius:var(--r); overflow:hidden;
+      background:var(--g-50); border:1px solid var(--border);
+      display:flex; align-items:center; justify-content:center;
+      transition:border-color var(--t), transform var(--t);
+    }
+    .hero-cat:hover .hero-cat-icon { border-color:var(--brand); transform:translateY(-2px); }
+    .hero-cat-icon img { width:100%; height:100%; object-fit:cover; }
+    .hero-cat-icon svg { width:26px; height:26px; fill:var(--navy); }
+    .hero-cat-label { font-size:11.5px; font-weight:600; color:var(--navy); line-height:1.25; }
+    @media (max-width:900px) { .hero-cats { margin-left:auto; margin-right:auto; } }
+    @media (max-width:480px) { .hero-cats { gap:10px; } .hero-cat-label { font-size:10.5px; } }
+
+    /* ── Seasonal promo banner (UC style) ── */
+    .promo-banner {
+      position:relative; overflow:hidden;
+      background:linear-gradient(120deg,#FFE9D6 0%,#FFF6EC 55%,#FFE3CF 100%);
+      padding:26px 24px; text-align:center; cursor:pointer;
+    }
+    .promo-banner-inner { max-width:var(--max); margin:auto; position:relative; z-index:1; }
+    .promo-banner p { font-family:var(--ff-h); font-size:clamp(16px,2.4vw,22px); font-weight:800; color:#7A3E1D; line-height:1.3; }
+    .promo-banner span.accent2 { color:var(--brand-dark); }
+    .promo-banner-sub { font-size:12.5px; color:#8A5A38; margin-top:6px; font-weight:600; }
+    .promo-banner::before, .promo-banner::after {
+      content:'❄'; position:absolute; font-size:60px; opacity:.18; color:#3B82C4;
+    }
+    .promo-banner::before { left:4%; top:-10px; transform:rotate(-15deg); }
+    .promo-banner::after { right:4%; bottom:-14px; transform:rotate(20deg); }
+
     /* ── Background Image Slider ── */
     .hero-slider {
       position:absolute;
@@ -1117,20 +1165,36 @@
     <div class="hero-top reveal">
       <div class="hero-uc-grid">
         <div class="hero-col-left">
+          <div class="hero-loc-bar">
+            <svg viewBox="0 0 24 24"><path d="M12 2C7.6 2 4 5.6 4 10c0 6 8 12 8 12s8-6 8-12c0-4.4-3.6-8-8-8zm0 11a3 3 0 110-6 3 3 0 010 6z"/></svg>
+            Serving Madurai • Technician in ~60 mins
+          </div>
           <h2 class="hero-tagline">Home appliance repairs<br>at your doorstep</h2>
           <p class="hero-tagline-sub">Certified technicians for AC, washing machine, refrigerator, RO & water heater — book in under a minute.</p>
-          <div class="hero-search-wrap" style="margin-bottom:18px;">
+          <div class="hero-search-wrap" style="margin-bottom:22px;">
             <div class="hero-search-bar">
               <svg viewBox="0 0 24 24"><path d="M21 21l-4.35-4.35M17 11a6 6 0 11-12 0 6 6 0 0112 0z" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
               <input type="text" placeholder="Search for AC repair, washing machine, RO service…" id="heroSearchInput">
               <button onclick="openPopup()">Search</button>
             </div>
           </div>
-          <div class="hero-chips" style="margin-bottom:24px;">
-            <span class="hero-chip" onclick="openPopup()">AC Repair</span>
-            <span class="hero-chip" onclick="openPopup()">Washing Machine</span>
-            <span class="hero-chip" onclick="openPopup()">RO Purifier</span>
-            <span class="hero-chip" onclick="openPopup()">Water Heater</span>
+          <div class="hero-cats">
+            <div class="hero-cat" onclick="openPopup()">
+              <div class="hero-cat-icon"><img src="ac-repair.png" alt="AC Repair"></div>
+              <div class="hero-cat-label">AC &amp; Appliance Repair</div>
+            </div>
+            <div class="hero-cat" onclick="openPopup()">
+              <div class="hero-cat-icon"><img src="washing-machine.png" alt="Washing Machine"></div>
+              <div class="hero-cat-label">Washing Machine</div>
+            </div>
+            <div class="hero-cat" onclick="openPopup()">
+              <div class="hero-cat-icon"><img src="ro-purifier.png" alt="RO Purifier"></div>
+              <div class="hero-cat-label">RO &amp; Water Purifier</div>
+            </div>
+            <div class="hero-cat" onclick="openPopup()">
+              <div class="hero-cat-icon"><svg viewBox="0 0 24 24"><path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6l-3 3-4.3-4.3C.6 7.1 1 10.1 3 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.4-.4.4-1.1 0-1.4z"/></svg></div>
+              <div class="hero-cat-label">Electrician &amp; Plumber</div>
+            </div>
           </div>
           <div class="hero-trust hero-trust-simple">
             <span><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> Free Diagnosis</span>
@@ -1150,6 +1214,14 @@
   </div>
 
   <div class="section-divider"></div>
+
+  <!-- SEASONAL PROMO BANNER (UC style) -->
+  <div class="promo-banner reveal" onclick="openPopup()">
+    <div class="promo-banner-inner">
+      <p>Beat the heat this summer — <span class="accent2">Book your AC service today</span></p>
+      <div class="promo-banner-sub">Flat ₹499 steam-jet wash • Slots filling fast</div>
+    </div>
+  </div>
 
   <!-- OFFERS & DISCOUNTS (UC style) -->
   <div class="offers-wrap reveal">
