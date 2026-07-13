@@ -119,7 +119,7 @@
       display:flex; align-items:center; justify-content:center;
     }
     .logo-mark svg { width:22px; height:22px; fill:rgb(173, 143, 60); }
-    .logo-text strong { font-family:var(--ff-h); font-size:20px; font-weight:900; color: blue; display:block; letter-spacing: -1px; }
+    .logo-text strong { font-family:var(--ff-h); font-size:20px; font-weight:900; color: blue; display:block; letter-spacing: -1px; text-transform:uppercase; }
     .logo-text em { font-style:italic; font-size:10px; font-weight:700; color: orangered; letter-spacing:1.8px; text-transform:uppercase; }
 
     .nav-search {
@@ -180,8 +180,37 @@
     .hero {
       position:relative;
       overflow:hidden;
-      padding:80px 0 0;
-      min-height:100vh;
+      padding:28px 0 0;
+      min-height:0;
+      background:linear-gradient(180deg, var(--brand-pale) 0%, var(--off) 55%, var(--off) 100%);
+    }
+    .hero-simple .hero-top { padding-top:32px; padding-bottom:32px; max-width:100%; text-align:left; margin-bottom:0; }
+    .hero-trust-simple { margin-bottom:0 !important; font-size:12.5px; gap:20px; opacity:.85; }
+
+    /* ── Two-column layout: search block + photo collage ── */
+    .hero-uc-grid { display:grid; grid-template-columns:1.05fr .95fr; gap:56px; align-items:center; }
+    .hero-col-left { text-align:left; }
+    .hero-tagline { font-family:var(--ff-h); font-size:clamp(26px,3vw,36px); font-weight:900; color:var(--navy); line-height:1.15; margin-bottom:10px; }
+    .hero-tagline-sub { font-size:14.5px; color:var(--text-soft); margin-bottom:26px; max-width:440px; }
+    .hero-col-left .hero-search-wrap { margin-left:0; margin-right:0; max-width:520px; }
+    .hero-col-left .hero-chips { justify-content:flex-start; }
+    .hero-col-left .hero-trust { justify-content:flex-start; }
+
+    .hero-collage { position:relative; height:420px; }
+    .hc-img { position:absolute; border-radius:var(--r-lg); overflow:hidden; box-shadow:var(--sh-lg); }
+    .hc-img img { width:100%; height:100%; object-fit:cover; display:block; }
+    .hc-1 { top:0; left:0; width:60%; height:62%; }
+    .hc-2 { top:0; right:0; width:36%; height:44%; }
+    .hc-3 { bottom:0; right:0; width:36%; height:48%; }
+    .hc-4 { bottom:0; left:6%; width:48%; height:32%; }
+
+    @media (max-width:900px) {
+      .hero-uc-grid { grid-template-columns:1fr; gap:0; }
+      .hero-collage { display:none; }
+      .hero-col-left { text-align:center; }
+      .hero-col-left .hero-search-wrap { margin:0 auto; }
+      .hero-col-left .hero-chips { justify-content:center; }
+      .hero-col-left .hero-trust { justify-content:center; }
     }
 
     /* ── Background Image Slider ── */
@@ -298,7 +327,7 @@
 
     .hero-trust {
       display:flex; gap:24px; justify-content:center; flex-wrap:wrap;
-      font-size:13px; color:rgba(255,255,255,0.85); margin-bottom:52px;
+      font-size:13px; font-weight:600; color:var(--text-soft); margin-bottom:52px;
     }
     .hero-trust span { display:flex; align-items:center; gap:6px; }
     .hero-trust svg { width:14px; height:14px; fill:var(--brand); }
@@ -306,7 +335,8 @@
     /* ════ SERVICE GRID ════ */
     .services-grid-wrap {
       background:white; border-radius:var(--r-xl) var(--r-xl) 0 0;
-      padding:48px 40px 56px;
+      padding:16px 40px 56px;
+      max-width:var(--max); margin:0 auto;
       overflow:hidden;
       box-shadow:0 -4px 40px rgba(0,0,0,.06);
     }
@@ -356,6 +386,99 @@
     .ic-pink { background:#FFF0F8; }
     .ic-teal { background:#F0FAFA; }
     .ic-orange { background:var(--brand-light); }
+
+    /* ════ UC-STYLE SEARCH BAR ════ */
+    .hero-search-wrap { max-width:640px; margin:0 auto 40px; }
+    .hero-search-bar {
+      display:flex; align-items:center; gap:10px;
+      background:white; border-radius:var(--r-full);
+      padding:6px 6px 6px 22px; box-shadow:var(--sh-lg);
+    }
+    .hero-search-bar svg { width:18px; height:18px; fill:var(--text-muted); flex-shrink:0; }
+    .hero-search-bar input {
+      flex:1; border:none; outline:none; background:none;
+      font-size:14.5px; color:var(--text); padding:12px 0;
+    }
+    .hero-search-bar input::placeholder { color:var(--text-muted); }
+    .hero-search-bar button {
+      background:var(--brand); color:white; font-weight:700; font-size:13.5px;
+      padding:13px 28px; border-radius:var(--r-full); flex-shrink:0;
+      transition:background var(--t);
+    }
+    .hero-search-bar button:hover { background:var(--brand-dark); }
+
+    /* ════ OFFERS & DISCOUNTS (UC style) ════ */
+    .section-divider { height:8px; background:var(--g-50); }
+    .hero-chips { display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin:0 0 22px; }
+    .hero-chip {
+      font-size:12px; font-weight:600; color:var(--text-soft);
+      background:white; border:1.5px solid var(--border); border-radius:var(--r-full);
+      padding:7px 14px; cursor:pointer; transition:border-color var(--t), color var(--t);
+    }
+    .hero-chip:hover { border-color:var(--brand); color:var(--brand-dark); }
+    .scroll-dots { display:flex; gap:6px; justify-content:center; margin-top:4px; }
+    .scroll-dots span { width:20px; height:3px; border-radius:99px; background:var(--g-200); }
+    .scroll-dots span.on { background:var(--navy); }
+    .offers-wrap { background:white; padding:40px 40px 8px; }
+    .offers-scroll {
+      display:flex; gap:16px; overflow-x:auto; padding-bottom:14px;
+      scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch;
+    }
+    .offers-scroll::-webkit-scrollbar { height:6px; }
+    .offers-scroll::-webkit-scrollbar-thumb { background:var(--g-200); border-radius:99px; }
+    .offer-card {
+      scroll-snap-align:start; flex:0 0 auto;
+      width:300px; min-height:150px; border-radius:var(--r-lg);
+      padding:22px 24px; position:relative; overflow:hidden;
+      display:flex; flex-direction:column; justify-content:center; gap:8px;
+      cursor:pointer; color:white;
+    }
+    .offer-card h3 { font-family:var(--ff-h); font-size:18px; font-weight:800; line-height:1.25; max-width:75%; position:relative; z-index:1; }
+    .offer-card p { font-size:12.5px; opacity:.85; max-width:75%; position:relative; z-index:1; }
+    .offer-card .offer-btn {
+      align-self:flex-start; margin-top:6px; position:relative; z-index:1;
+      background:white; color:var(--navy); font-size:12.5px; font-weight:700;
+      padding:8px 16px; border-radius:var(--r-full);
+    }
+    .offer-1 { background:linear-gradient(135deg,#1D2B23,#324B3B); }
+    .offer-2 { background:linear-gradient(135deg,#0F3D5C,#1E6FA1); }
+    .offer-3 { background:linear-gradient(135deg,#5C2E0F,#C43F0E); }
+    .offer-4 { background:linear-gradient(135deg,#3A2B5C,#6C4BAE); }
+    .offer-card::after {
+      content:''; position:absolute; right:-30px; bottom:-30px;
+      width:120px; height:120px; border-radius:50%;
+      background:rgba(255,255,255,.08);
+    }
+
+    /* ════ MOST BOOKED SERVICES (UC style scroll) ════ */
+    .mbs-scroll {
+      display:flex; gap:14px; overflow-x:auto; padding-bottom:8px;
+      scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch;
+    }
+    .mbs-scroll::-webkit-scrollbar { height:6px; }
+    .mbs-scroll::-webkit-scrollbar-thumb { background:var(--g-200); border-radius:99px; }
+    .mbs-card {
+      scroll-snap-align:start; flex:0 0 auto; width:150px;
+      cursor:pointer; border-radius:var(--r); overflow:hidden;
+      border:1.5px solid var(--border); transition:border-color var(--t), transform var(--t), box-shadow var(--t);
+      background:white;
+    }
+    .mbs-card:hover { border-color:var(--brand); transform:translateY(-3px); box-shadow:var(--sh-sm); }
+    .mbs-img { width:100%; height:120px; background:var(--g-50); overflow:hidden; }
+    .mbs-img img { width:100%; height:100%; object-fit:cover; }
+    .mbs-body { padding:12px 12px 14px; }
+    .mbs-label { font-size:12.5px; font-weight:700; color:var(--navy); line-height:1.3; min-height:32px; }
+    .mbs-sub { font-size:11.5px; color:var(--brand-dark); font-weight:700; margin-top:4px; }
+
+    @media (max-width:768px) {
+      .offers-wrap { padding:26px 20px 4px; }
+      .offer-card { width:250px; min-height:125px; padding:18px 20px; }
+      .offer-card h3 { font-size:16px; }
+      .mbs-card { width:128px; }
+      .mbs-img { height:96px; }
+      .hero-search-bar { padding:5px 5px 5px 18px; }
+      .hero-search-bar button { padding:11px 20px; font-size:13px; }
+    }
 
     /* ════════════════ TRUST STRIP ════════════════ */
     .trust-strip { background:var(--navy); padding:28px 0; }
@@ -819,11 +942,7 @@
       .why-cards { grid-template-columns:1fr; }
       .stats-inner { grid-template-columns:repeat(2,1fr); }
       .footer-bottom { flex-direction:column; align-items:center; text-align:center; }
-      .hero { padding:30px 0 0; min-height:100svh; }
-      .hs-slide { transform:none !important; background-position:center center; }
-      .hs-slide.active { animation:none !important; transform:none !important; }
-      .hero-slider { background:var(--navy); }
-      .hs-slide { background-size:contain !important; background-repeat:no-repeat; background-color:var(--navy); }
+      .hero { padding:20px 0 0; min-height:0; }
       .hiw-grid { grid-template-columns:1fr; }
       .hiw-connector { display:none; }
       .app-btns { flex-direction:column; }
@@ -992,117 +1111,143 @@
 <!-- ════════════════════════════════════════
   HERO + SERVICES
 ════════════════════════════════════════ -->
-<section class="hero" id="home">
-
-  <!-- ═══ BACKGROUND IMAGE SLIDER ═══ -->
-  <div class="hero-slider" id="heroSlider">
-    <div class="hs-slide hs-slide-1 active"></div>
-    <div class="hs-slide hs-slide-2"></div>
-    <div class="hs-slide hs-slide-3"></div>
-    <div class="hs-slide hs-slide-4"></div>
-    <div class="hs-slide hs-slide-5"></div>
-  </div>
-  <div class="hero-overlay"></div>
-  <div class="hs-dots">
-    <button class="hs-dot active" onclick="goHeroSlide(0)"></button>
-    <button class="hs-dot" onclick="goHeroSlide(1)"></button>
-    <button class="hs-dot" onclick="goHeroSlide(2)"></button>
-    <button class="hs-dot" onclick="goHeroSlide(3)"></button>
-    <button class="hs-dot" onclick="goHeroSlide(4)"></button>
-  </div>
+<section class="hero hero-simple" id="home">
 
   <div class="hero-inner">
     <div class="hero-top reveal">
-      <div class="hero-badge">
-        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-        People's #1 Appliance Repair Service
-      </div>
-      <h1>Your Home Deserves<br><span class="accent">Expert Care</span></h1>
-      <p class="hero-sub">Professional AC, Washing Machine, Refrigerator & all home appliance repairs. Certified technicians at your door in 60 minutes.</p>
-      <div class="hero-ctas">
-        <button class="btn-primary" onclick="openPopup()">
-          <svg viewBox="0 0 24 24"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>
-          Book Inspection
-        </button>
-        <a href="https://wa.me/918098606019" class="btn-secondary" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-          Chat on WhatsApp
-        </a>
-      </div>
-      <div class="hero-trust">
-        <span><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> Free Diagnosis</span>
-        <span><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> 60-Min Response</span>
-        <span><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> 90-Day Warranty</span>
-        <span><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> Transparent Pricing</span>
+      <div class="hero-uc-grid">
+        <div class="hero-col-left">
+          <h2 class="hero-tagline">Home appliance repairs<br>at your doorstep</h2>
+          <p class="hero-tagline-sub">Certified technicians for AC, washing machine, refrigerator, RO & water heater — book in under a minute.</p>
+          <div class="hero-search-wrap" style="margin-bottom:18px;">
+            <div class="hero-search-bar">
+              <svg viewBox="0 0 24 24"><path d="M21 21l-4.35-4.35M17 11a6 6 0 11-12 0 6 6 0 0112 0z" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+              <input type="text" placeholder="Search for AC repair, washing machine, RO service…" id="heroSearchInput">
+              <button onclick="openPopup()">Search</button>
+            </div>
+          </div>
+          <div class="hero-chips" style="margin-bottom:24px;">
+            <span class="hero-chip" onclick="openPopup()">AC Repair</span>
+            <span class="hero-chip" onclick="openPopup()">Washing Machine</span>
+            <span class="hero-chip" onclick="openPopup()">RO Purifier</span>
+            <span class="hero-chip" onclick="openPopup()">Water Heater</span>
+          </div>
+          <div class="hero-trust hero-trust-simple">
+            <span><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> Free Diagnosis</span>
+            <span><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> 60-Min Response</span>
+            <span><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> 90-Day Warranty</span>
+            <span><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> Transparent Pricing</span>
+          </div>
+        </div>
+        <div class="hero-collage">
+          <div class="hc-img hc-1"><img src="ac-install.jpg" alt="AC technician at work"></div>
+          <div class="hc-img hc-2"><img src="washing-machine.png" alt="Washing machine service"></div>
+          <div class="hc-img hc-3"><img src="refrigerator.png" alt="Refrigerator service"></div>
+          <div class="hc-img hc-4"><img src="ac-cleaning.png" alt="AC cleaning"></div>
+        </div>
       </div>
     </div>
+  </div>
 
-    <!-- SERVICES GRID (UC style) -->
-    <div class="services-grid-wrap reveal" id="services">
-      <div class="section-top">
-        <h2>Our Services</h2>
-        <a href="#" class="view-all" onclick="openPopup();return false">Book a Service <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></a>
+  <div class="section-divider"></div>
+
+  <!-- OFFERS & DISCOUNTS (UC style) -->
+  <div class="offers-wrap reveal">
+    <div class="hero-inner" style="padding:0;">
+      <div class="section-top" style="margin-bottom:18px;">
+        <h2>Offers &amp; Discounts</h2>
       </div>
-      <div class="services-grid">
-        <div class="svc-card" onclick="openPopup()">
-          <div class="svc-icon ic-blue">
-    <img src="ac-repair.png" alt="AC Repair">
-</div>
-          <div class="svc-label">AC General service</div>
-          <div class="svc-sub">From ₹249</div>
+      <div class="offers-scroll" id="offersScroll">
+        <div class="offer-card offer-1" onclick="openPopup()">
+          <h3>Deep clean with steam‑jet AC service</h3>
+          <p>AC service &amp; repair</p>
+          <span class="offer-btn">Book now</span>
         </div>
-        <div class="svc-card" onclick="openPopup()">
-          <div class="svc-icon ic-white">
-    <img src="ac-cleaning.png" alt="AC Cleaning">
-</div>
-          <div class="svc-label">AC Jet Wash</div>
-          <div class="svc-sub">From ₹499</div>
+        <div class="offer-card offer-2" onclick="openPopup()">
+          <h3>Fresh &amp; safe water, every day</h3>
+          <p>RO purifier service</p>
+          <span class="offer-btn">Book now</span>
         </div>
-        <div class="svc-card" onclick="openPopup()">
-          <div class="svc-icon ic-teal">
-    <img src="ac-install.jpg" alt="AC Install">
-</div>
-          <div class="svc-label">AC Install</div>
-          <div class="svc-sub">From ₹1200</div>
+        <div class="offer-card offer-3" onclick="openPopup()">
+          <h3>90‑Day warranty on every repair</h3>
+          <p>All appliances covered</p>
+          <span class="offer-btn">Know more</span>
         </div>
-        <div class="svc-card" onclick="openPopup()">
-          
-<div class="svc-icon ic-purple">
-    <img src="washing-machine.png" alt="Washing Machine">
-</div>
-          <div class="svc-label">Washing Machine General Service</div>
-          <div class="svc-sub">From ₹249</div>
+        <div class="offer-card offer-4" onclick="openPopup()">
+          <h3>First service at flat ₹249</h3>
+          <p>Washing machine &amp; refrigerator</p>
+          <span class="offer-btn">Book now</span>
         </div>
-        <div class="svc-card" onclick="openPopup()">
-          <div class="svc-icon ic-yellow">
-    <img src="refrigerator.png" alt="Refrigerator">
-</div>
+      </div>
+      <div class="scroll-dots" id="offersDots">
+        <span class="on"></span><span></span><span></span><span></span>
+      </div>
+    </div>
+  </div>
 
-          <div class="svc-label">Refrigerator General Service</div>
-          <div class="svc-sub">From ₹249</div>
+  <div class="section-divider"></div>
+
+  <!-- MOST BOOKED SERVICES (UC style) -->
+  <div class="services-grid-wrap reveal" id="services">
+    <div class="section-top">
+      <h2>Most Booked Services</h2>
+      <a href="#" class="view-all" onclick="openPopup();return false">Book a Service <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></a>
+    </div>
+    <div class="mbs-scroll">
+      <div class="mbs-card" onclick="openPopup()">
+        <div class="mbs-img"><img src="ac-repair.png" alt="AC Repair"></div>
+        <div class="mbs-body">
+          <div class="mbs-label">AC General Service</div>
+          <div class="mbs-sub">From ₹249</div>
         </div>
-        <div class="svc-card" onclick="openPopup()">
-          <div class="svc-icon ic-yellow">
-    <img src="water-heater.png" alt="Water Heater">
-</div>
-          <div class="svc-label">Water Heater General service</div>
-          <div class="svc-sub">From ₹249</div>
+      </div>
+      <div class="mbs-card" onclick="openPopup()">
+        <div class="mbs-img"><img src="ac-cleaning.png" alt="AC Cleaning"></div>
+        <div class="mbs-body">
+          <div class="mbs-label">AC Jet Wash</div>
+          <div class="mbs-sub">From ₹499</div>
         </div>
-        <div class="svc-card" onclick="openPopup()">
-          <div class="svc-icon ic-blue">
-    <img src="ro-purifier.png" alt="RO Purifier">
-</div>
-          <div class="svc-label">RO Purifier General Service</div>
-          <div class="svc-sub">From ₹299</div>
+      </div>
+      <div class="mbs-card" onclick="openPopup()">
+        <div class="mbs-img"><img src="ac-install.jpg" alt="AC Install"></div>
+        <div class="mbs-body">
+          <div class="mbs-label">AC Install</div>
+          <div class="mbs-sub">From ₹1200</div>
         </div>
-        <div class="svc-card" onclick="openPopup()">
-          <div class="svc-icon ic-red">
-    <img src="ac-jet-wash.png" alt="AC Water Wash">
-</div>
-          <div class="svc-label">AC Full Service </div>
-          <div class="svc-sub">From ₹999
-          
-          </div>
+      </div>
+      <div class="mbs-card" onclick="openPopup()">
+        <div class="mbs-img"><img src="washing-machine.png" alt="Washing Machine"></div>
+        <div class="mbs-body">
+          <div class="mbs-label">Washing Machine Service</div>
+          <div class="mbs-sub">From ₹249</div>
+        </div>
+      </div>
+      <div class="mbs-card" onclick="openPopup()">
+        <div class="mbs-img"><img src="refrigerator.png" alt="Refrigerator"></div>
+        <div class="mbs-body">
+          <div class="mbs-label">Refrigerator Service</div>
+          <div class="mbs-sub">From ₹249</div>
+        </div>
+      </div>
+      <div class="mbs-card" onclick="openPopup()">
+        <div class="mbs-img"><img src="water-heater.png" alt="Water Heater"></div>
+        <div class="mbs-body">
+          <div class="mbs-label">Water Heater Service</div>
+          <div class="mbs-sub">From ₹249</div>
+        </div>
+      </div>
+      <div class="mbs-card" onclick="openPopup()">
+        <div class="mbs-img"><img src="ro-purifier.png" alt="RO Purifier"></div>
+        <div class="mbs-body">
+          <div class="mbs-label">RO Purifier Service</div>
+          <div class="mbs-sub">From ₹299</div>
+        </div>
+      </div>
+      <div class="mbs-card" onclick="openPopup()">
+        <div class="mbs-img"><img src="ac-jet-wash.png" alt="AC Water Wash"></div>
+        <div class="mbs-body">
+          <div class="mbs-label">AC Full Service</div>
+          <div class="mbs-sub">From ₹999</div>
         </div>
       </div>
     </div>
@@ -1812,7 +1957,7 @@ Cooling Efficiency Testing</div>
   JAVASCRIPT
 ════════════════════════════════════════ -->
 <script>
-  /* ════ HERO BACKGROUND SLIDER ════ */
+  /* ════ HERO BACKGROUND SLIDER (disabled — hero simplified to search bar) ════ */
   let heroSlide = 0;
   const HS_TOTAL = 5;
   const hsSlides = document.querySelectorAll('.hs-slide');
@@ -1820,6 +1965,7 @@ Cooling Efficiency Testing</div>
   let hsAuto;
 
   function goHeroSlide(n) {
+    if (!hsSlides.length) return;
     hsSlides[heroSlide].classList.remove('active');
     hsDots[heroSlide].classList.remove('active');
     heroSlide = ((n % HS_TOTAL) + HS_TOTAL) % HS_TOTAL;
@@ -1829,7 +1975,9 @@ Cooling Efficiency Testing</div>
     hsAuto = setInterval(() => goHeroSlide(heroSlide + 1), 5000);
   }
 
-  hsAuto = setInterval(() => goHeroSlide(heroSlide + 1), 5000);
+  if (hsSlides.length) {
+    hsAuto = setInterval(() => goHeroSlide(heroSlide + 1), 5000);
+  }
 
 
   window.addEventListener('load', () => {
@@ -1928,6 +2076,24 @@ Cooling Efficiency Testing</div>
   document.getElementById('searchInput').addEventListener('keypress', e => {
     if (e.key === 'Enter') openPopup();
   });
+  const heroSearchInput = document.getElementById('heroSearchInput');
+  if (heroSearchInput) {
+    heroSearchInput.addEventListener('keypress', e => {
+      if (e.key === 'Enter') openPopup();
+    });
+  }
+
+  /* OFFERS SCROLL → DOTS SYNC */
+  (function () {
+    const scroller = document.getElementById('offersScroll');
+    const dots = document.querySelectorAll('#offersDots span');
+    if (!scroller || !dots.length) return;
+    scroller.addEventListener('scroll', () => {
+      const cardW = scroller.firstElementChild.offsetWidth + 16;
+      const idx = Math.round(scroller.scrollLeft / cardW);
+      dots.forEach((d, i) => d.classList.toggle('on', i === Math.min(idx, dots.length - 1)));
+    }, { passive: true });
+  })();
 
   /* ════ QUICK QUOTE FORM → GOOGLE SHEET ════ */
   // PASTE your Google Apps Script Web App URL below (see setup guide).
