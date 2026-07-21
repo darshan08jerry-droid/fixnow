@@ -477,33 +477,33 @@
     .offers-scroll::-webkit-scrollbar-thumb { background:var(--g-200); border-radius:99px; }
     .offer-card {
       scroll-snap-align:start; flex:0 0 auto;
-      width:min(84vw,540px); height:300px; border-radius:var(--r-lg);
-      padding:20px 22px; position:relative; overflow:hidden;
-      display:flex; flex-direction:column; justify-content:flex-end; gap:6px;
-      cursor:pointer; color:white; background:#0B0B0D;
+      width:min(84vw,540px); height:220px; border-radius:var(--r-lg);
+      overflow:hidden; cursor:pointer; color:var(--navy);
+      display:flex; align-items:stretch; justify-content:space-between;
     }
+    .offer-card.offer-1 { background:#F1F0EC; }
+    .offer-card.offer-2 { background:#E6F2F1; }
+    .offer-card.offer-3 { background:#FBEFE3; }
+    .offer-card.offer-4 { background:#F0EDF7; }
+    .offer-text { padding:22px 20px; display:flex; flex-direction:column; justify-content:center; gap:6px; flex:1; min-width:0; }
     .offer-badge {
-      position:absolute; top:16px; left:16px; z-index:2;
-      background:var(--brand); color:var(--navy); font-size:11px; font-weight:800;
-      letter-spacing:.02em; padding:6px 12px; border-radius:var(--r-full);
+      display:inline-block; background:var(--brand); color:var(--navy); font-size:11px; font-weight:800;
+      letter-spacing:.02em; padding:5px 11px; border-radius:var(--r-full); margin-bottom:2px; align-self:flex-start;
     }
-    .offer-card h3 { font-family:var(--ff-h); font-size:19px; font-weight:800; line-height:1.25; max-width:85%; position:relative; z-index:2; }
-    .offer-card p { font-size:12.5px; opacity:.8; max-width:85%; position:relative; z-index:2; }
+    .offer-card h3 { font-family:var(--ff-h); font-size:18px; font-weight:800; line-height:1.25; }
+    .offer-card p { font-size:12.5px; color:var(--text-soft); }
     .offer-card .offer-btn {
-      align-self:flex-start; margin-top:8px; position:relative; z-index:2;
-      background:white; color:var(--navy); font-size:12.5px; font-weight:700;
+      align-self:flex-start; margin-top:8px;
+      background:var(--navy); color:white; font-size:12.5px; font-weight:700;
       padding:9px 18px; border-radius:var(--r-full);
     }
     .offer-img {
-      position:absolute; inset:0; z-index:0; background:#0B0B0D;
+      flex:0 0 42%; height:100%; overflow:hidden;
     }
     .offer-img img {
-      width:100%; height:100%; object-fit:cover; opacity:1;
+      width:100%; height:100%; object-fit:cover; display:block;
     }
-    .offer-card::after {
-      content:''; position:absolute; inset:0; z-index:1;
-      background: linear-gradient(0deg, rgba(0,0,0,.75) 0%, rgba(0,0,0,.4) 32%, transparent 58%);
-    }
+
 
     /* ════ MOST BOOKED SERVICES (UC style scroll) ════ */
     .mbs-scroll {
@@ -528,8 +528,9 @@
     @media (max-width:768px) {
       .offers-wrap { padding:26px 16px 4px; }
       .offers-scroll { gap:12px; scroll-padding-left:16px; }
-      .offer-card { width:82vw; max-width:340px; height:240px; padding:16px 18px; }
-      .offer-card h3 { font-size:16px; }
+      .offer-card { width:82vw; max-width:340px; height:190px; }
+      .offer-text { padding:16px 14px; }
+      .offer-card h3 { font-size:15px; }
       .mbs-card { width:128px; }
       .mbs-img { height:96px; }
       .hero-search-bar { padding:5px 5px 5px 18px; }
@@ -1191,24 +1192,36 @@
       </div>
       <div class="offers-scroll" id="offersScroll">
         <div class="offer-card offer-1" onclick="openPopup()">
+          <div class="offer-text">
+            <h3>Deep clean with foam-jet AC service</h3>
+            <p>AC service &amp; repair</p>
+            <span class="offer-btn">Book now</span>
+          </div>
           <div class="offer-img"><img src="frontslide1.png" alt="AC steam-jet service"></div>
-          <p>AC service &amp; repair</p>
-          <span class="offer-btn">Book now</span>
         </div>
         <div class="offer-card offer-2" onclick="openPopup()">
+          <div class="offer-text">
+            <h3>Cool &amp; hygienic, always</h3>
+            <p>Refrigerator general service</p>
+            <span class="offer-btn">Book now</span>
+          </div>
           <div class="offer-img"><img src="frontslide2.png" alt="Refrigerator service"></div>
-          <p>Refrigerator general service</p>
-          <span class="offer-btn">Book now</span>
         </div>
         <div class="offer-card offer-3" onclick="openPopup()">
+          <div class="offer-text">
+            <h3>Spotless clean, every wash</h3>
+            <p>Washing machine service</p>
+            <span class="offer-btn">Book now</span>
+          </div>
           <div class="offer-img"><img src="frontslide3.png" alt="Washing machine service"></div>
-          <p>Washing machine service</p>
-          <span class="offer-btn">Book now</span>
         </div>
         <div class="offer-card offer-4" onclick="openPopup()">
+          <div class="offer-text">
+            <h3>Full recharge, full cooling</h3>
+            <p>Ac Gas Filling</p>
+            <span class="offer-btn">Book now</span>
+          </div>
           <div class="offer-img"><img src="frontslide4.png" alt="AC installation"></div>
-          <p>Ac Gas Filling </p>
-          <span class="offer-btn">Book now</span>
         </div>
       </div>
       <div class="scroll-dots" id="offersDots">
