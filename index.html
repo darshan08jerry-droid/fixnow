@@ -471,6 +471,7 @@
     .offers-scroll {
       display:flex; gap:16px; overflow-x:auto; padding-bottom:14px;
       scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch;
+      scroll-padding-left:40px;
     }
     .offers-scroll::-webkit-scrollbar { height:6px; }
     .offers-scroll::-webkit-scrollbar-thumb { background:var(--g-200); border-radius:99px; }
@@ -525,8 +526,9 @@
     .mbs-sub { font-size:11.5px; color:var(--brand-dark); font-weight:700; margin-top:4px; }
 
     @media (max-width:768px) {
-      .offers-wrap { padding:26px 20px 4px; }
-      .offer-card { width:86vw; height:260px; padding:16px 18px; }
+      .offers-wrap { padding:26px 16px 4px; }
+      .offers-scroll { gap:12px; scroll-padding-left:16px; }
+      .offer-card { width:82vw; max-width:340px; height:240px; padding:16px 18px; }
       .offer-card h3 { font-size:16px; }
       .mbs-card { width:128px; }
       .mbs-img { height:96px; }
@@ -1195,7 +1197,6 @@
         </div>
         <div class="offer-card offer-2" onclick="openPopup()">
           <div class="offer-img"><img src="frontslide2.png" alt="Refrigerator service"></div>
-          <img src="frontslide1.png" alt="Refrigerator service">
           <p>Refrigerator general service</p>
           <span class="offer-btn">Book now</span>
         </div>
