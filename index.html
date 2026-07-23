@@ -143,6 +143,54 @@
     .nav-search button:hover { background:var(--brand-dark); }
 
     .nav-links { display:flex; gap:2px; align-items:center; margin-left:auto; }
+
+    /* ════ LIVE SEARCH SUGGESTIONS ════ */
+    .search-wrap-rel { position:relative; }
+    .search-suggest {
+      position:fixed; z-index:9999;
+      background:white; border:1px solid var(--border); border-radius:16px;
+      box-shadow:var(--sh-lg); overflow:hidden;
+      opacity:0; visibility:hidden; transform:translateY(-6px);
+      transition:opacity .15s, transform .15s, visibility .15s;
+    }
+    .search-suggest.open { opacity:1; visibility:visible; transform:translateY(0); }
+    .search-suggest-label {
+      padding:12px 16px 6px; font-size:11.5px; font-weight:800; text-transform:uppercase;
+      letter-spacing:.04em; color:var(--text-muted);
+    }
+    @keyframes suggestFadeIn { from { opacity:0; transform:translateY(4px); } to { opacity:1; transform:translateY(0); } }
+    .search-suggest-item {
+      display:flex; align-items:center; gap:12px; padding:10px 16px;
+      cursor:pointer; font-size:13.5px; color:var(--text);
+      animation:suggestFadeIn .28s ease both;
+    }
+    .search-suggest-item:hover { background:var(--g-50); }
+    .search-suggest-item .sugg-icon {
+      width:36px; height:36px; border-radius:11px; flex-shrink:0;
+      display:flex; align-items:center; justify-content:center;
+      background:var(--sugg-bg, var(--g-50)); color:var(--sugg-fg, var(--text-muted));
+    }
+    .search-suggest-item .sugg-icon svg { width:18px; height:18px; }
+    .search-suggest-item b { color:var(--navy); font-weight:700; flex:1; min-width:0; }
+    .search-suggest-item .sugg-price {
+      font-size:11.5px; font-weight:700; color:var(--text-muted); flex-shrink:0;
+    }
+    .search-suggest-empty { padding:16px; font-size:13px; color:var(--text-muted); }
+
+    .search-suggest-chips {
+      display:flex; gap:8px; overflow-x:auto; padding:2px 16px 16px; scrollbar-width:none;
+    }
+    .search-suggest-chips::-webkit-scrollbar { display:none; }
+    .sugg-chip {
+      display:flex; align-items:center; gap:7px; flex-shrink:0;
+      border:1.5px solid var(--border); border-radius:var(--r-full);
+      padding:8px 14px 8px 8px; font-size:12.5px; font-weight:700; color:var(--navy);
+      cursor:pointer; transition:border-color var(--t), transform var(--t);
+      animation:suggestFadeIn .28s ease both;
+    }
+    .sugg-chip:hover { border-color:var(--brand); transform:translateY(-1px); }
+    .sugg-chip .sugg-icon { width:26px; height:26px; border-radius:50%; }
+    .sugg-chip .sugg-icon svg { width:14px; height:14px; }
     .nav-links a {
       padding:8px 14px; border-radius:var(--r-sm);
       font-size:14px; font-weight:500; color:var(--g-600);
@@ -915,7 +963,219 @@
     .sticky-mobile a:last-child { background:#22C55E; }
     .sticky-mobile svg { width:17px; height:17px; fill:currentColor; }
 
-    /* ════════════════ POPUP ════════════════ */
+    /* ════════════════ HERO MASCOT (animated illustration) ════════════════ */
+    .hero-mascot { display:flex; justify-content:center; margin-bottom:14px; }
+    .hero-mascot svg { width:150px; height:96px; overflow:visible; }
+    .hm-gear { transform-origin:center; animation:hmSpin 6s linear infinite; }
+    .hm-wrench { transform-origin:70% 70%; animation:hmWrench 2.4s ease-in-out infinite; }
+    .hm-mist path { animation:hmMist 2.6s ease-in-out infinite; }
+    .hm-mist path:nth-child(2) { animation-delay:.4s; }
+    .hm-mist path:nth-child(3) { animation-delay:.8s; }
+    @keyframes hmSpin { to { transform:rotate(360deg); } }
+    @keyframes hmWrench { 0%,100% { transform:rotate(-8deg); } 50% { transform:rotate(8deg); } }
+    @keyframes hmMist { 0% { opacity:0; transform:translateY(4px); } 40% { opacity:.9; } 100% { opacity:0; transform:translateY(-10px); } }
+
+    /* ════════════════ DIAGNOSTIC QUIZ ════════════════ */
+    .diag-wrap { padding:44px 0; }
+    .diag-card {
+      max-width:600px; margin:0 auto; background:var(--off); border:1.5px solid var(--border);
+      border-radius:var(--r-xl); padding:32px 28px; position:relative; overflow:hidden;
+    }
+    .diag-progress { display:flex; gap:6px; margin-bottom:20px; }
+    .diag-progress span { flex:1; height:4px; border-radius:var(--r-full); background:var(--g-200); }
+    .diag-progress span.done { background:var(--brand); }
+    .diag-step { animation:diagIn .35s ease; }
+    .diag-step.leaving { animation:diagOut .25s ease forwards; }
+    @keyframes diagIn { from { opacity:0; transform:translateX(16px); } to { opacity:1; transform:translateX(0); } }
+    @keyframes diagOut { to { opacity:0; transform:translateX(-16px); } }
+    .diag-q { font-family:var(--ff-h); font-size:19px; font-weight:800; color:var(--navy); margin-bottom:18px; }
+    .diag-opt {
+      display:flex; align-items:center; gap:12px; width:100%; text-align:left;
+      background:white; border:1.5px solid var(--border); border-radius:var(--r-md);
+      padding:14px 16px; margin-bottom:10px; font-size:14.5px; font-weight:600; color:var(--text);
+      cursor:pointer; transition:border-color var(--t), transform var(--t);
+    }
+    .diag-opt:hover { border-color:var(--brand); transform:translateX(3px); }
+    .diag-back { font-size:12.5px; color:var(--text-muted); cursor:pointer; display:inline-flex; align-items:center; gap:4px; margin-bottom:14px; }
+    .diag-result-icon {
+      width:52px; height:52px; border-radius:14px; background:var(--brand-light); color:var(--brand);
+      display:flex; align-items:center; justify-content:center; margin-bottom:14px;
+    }
+    .diag-result-icon svg { width:26px; height:26px; fill:none; stroke:currentColor; stroke-width:2; }
+    .diag-result-title { font-family:var(--ff-h); font-size:20px; font-weight:900; color:var(--navy); margin-bottom:6px; }
+    .diag-result-note { font-size:13.5px; color:var(--text-soft); margin-bottom:16px; }
+    .diag-result-service {
+      display:flex; align-items:center; justify-content:space-between; background:white;
+      border:1.5px solid var(--border); border-radius:var(--r-md); padding:14px 16px; margin-bottom:18px;
+    }
+    .diag-result-service b { color:var(--navy); font-size:14.5px; }
+    .diag-result-service span { color:var(--brand); font-weight:700; font-size:13.5px; }
+    .diag-restart { font-size:12.5px; color:var(--text-muted); text-decoration:underline; cursor:pointer; }
+
+    /* ════════════════ BEFORE / AFTER SLIDER ════════════════ */
+    .ba-wrap { padding:8px 0 44px; }
+    .ba-slider {
+      position:relative; max-width:560px; margin:0 auto; aspect-ratio:16/10;
+      border-radius:var(--r-lg); overflow:hidden; user-select:none; cursor:ew-resize;
+      border:1.5px solid var(--border);
+    }
+    .ba-slider .ba-panel { position:absolute; inset:0; }
+    .ba-slider .ba-after { clip-path:inset(0 0 0 50%); }
+    .ba-tag { position:absolute; top:12px; font-size:11.5px; font-weight:800; padding:5px 12px; border-radius:var(--r-full); }
+    .ba-tag.before { left:12px; background:rgba(0,0,0,.55); color:white; }
+    .ba-tag.after { right:12px; background:var(--brand); color:white; }
+    .ba-handle {
+      position:absolute; top:0; bottom:0; left:50%; width:0; transform:translateX(-1px);
+      border-left:3px solid white; pointer-events:none;
+    }
+    .ba-handle::after {
+      content:''; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+      width:38px; height:38px; border-radius:50%; background:white;
+      box-shadow:0 2px 10px rgba(0,0,0,.25);
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23223047' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='M8 8l-4 4 4 4M16 8l4 4-4 4'/%3E%3C/svg%3E");
+      background-repeat:no-repeat; background-position:center;
+    }
+
+    /* ════════════════ VIDEO EXPLAINER ════════════════ */
+    .video-section { padding:64px 0; background:var(--off); }
+    .video-inner { max-width:820px; margin:0 auto; padding:0 24px; text-align:center; }
+    .video-inner .section-label { justify-content:center; }
+    .video-inner h2 { margin-bottom:8px; }
+    .video-inner .video-sub { color:var(--text-soft); font-size:14.5px; margin-bottom:28px; }
+    .video-player {
+      position:relative; border-radius:var(--r-xl); overflow:hidden; aspect-ratio:16/9;
+      background:#0B0B0D; box-shadow:var(--sh-lg); cursor:pointer;
+    }
+    .video-player video, .video-player img.video-poster {
+      position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+    }
+    .video-play-btn {
+      position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+      width:74px; height:74px; border-radius:50%; background:rgba(255,255,255,.95);
+      display:flex; align-items:center; justify-content:center; transition:transform var(--t);
+      z-index:2;
+    }
+    .video-player:hover .video-play-btn { transform:translate(-50%,-50%) scale(1.08); }
+    .video-play-btn svg { width:26px; height:26px; fill:var(--brand); margin-left:4px; }
+    .video-player.playing .video-play-btn, .video-player.playing .video-poster { display:none; }
+    .video-caption { margin-top:14px; font-size:12.5px; color:var(--text-muted); }
+
+    /* ════════════════ SERVICE VIDEO PREVIEW (on Most Booked Services cards) ════════════════ */
+    .mbs-img { position:relative; }
+    .mbs-play-badge {
+      position:absolute; bottom:8px; right:8px; width:30px; height:30px; border-radius:50%;
+      background:rgba(0,0,0,.55); display:flex; align-items:center; justify-content:center; z-index:2;
+    }
+    .mbs-play-badge svg { width:12px; height:12px; fill:white; margin-left:1px; }
+
+    /* ════════════════ SKELETON LOADING STATES ════════════════ */
+    .skeleton {
+      position:relative; overflow:hidden; background:var(--g-100);
+    }
+    .skeleton::after {
+      content:''; position:absolute; inset:0;
+      background:linear-gradient(90deg, transparent, rgba(255,255,255,.55), transparent);
+      transform:translateX(-100%); animation:skeletonShimmer 1.3s ease-in-out infinite;
+    }
+    @keyframes skeletonShimmer { 100% { transform:translateX(100%); } }
+    img.img-loading { opacity:0; }
+    img.img-loaded { opacity:1; transition:opacity .35s ease; }
+
+    .acct-tabs { display:flex; gap:8px; margin-bottom:20px; border-bottom:1.5px solid var(--border); }
+    .acct-tab {
+      padding:10px 4px; margin-right:20px; font-size:14px; font-weight:700; color:var(--text-muted);
+      border-bottom:2.5px solid transparent; cursor:pointer; transition:color var(--t), border-color var(--t);
+    }
+    .acct-tab.active { color:var(--brand); border-color:var(--brand); }
+    .acct-lookup-row { display:flex; gap:10px; }
+    .acct-lookup-row input { flex:1; }
+    .acct-lookup-row button {
+      background:var(--navy); color:white; font-weight:700; font-size:13.5px;
+      padding:0 20px; border-radius:var(--r-sm); white-space:nowrap;
+    }
+    .acct-history-item {
+      display:flex; align-items:center; gap:12px; padding:14px; border:1.5px solid var(--border);
+      border-radius:var(--r-md); margin-bottom:10px;
+    }
+    .acct-history-item .ahi-icon {
+      width:38px; height:38px; border-radius:10px; background:var(--brand-light); color:var(--brand);
+      display:flex; align-items:center; justify-content:center; flex-shrink:0;
+    }
+    .acct-history-item .ahi-icon svg { width:18px; height:18px; fill:none; stroke:currentColor; stroke-width:2; }
+    .acct-history-item .ahi-main { flex:1; min-width:0; }
+    .acct-history-item .ahi-service { font-weight:700; color:var(--navy); font-size:14px; }
+    .acct-history-item .ahi-date { font-size:12px; color:var(--text-muted); margin-top:2px; }
+    .acct-history-item .ahi-warranty {
+      font-size:11px; font-weight:700; padding:4px 10px; border-radius:var(--r-full); flex-shrink:0; white-space:nowrap;
+    }
+    .ahi-warranty.active { background:#E8F8F1; color:#22B37B; }
+    .ahi-warranty.expired { background:var(--g-100); color:var(--text-muted); }
+    .acct-empty { text-align:center; padding:32px 10px; color:var(--text-muted); font-size:13.5px; }
+    .acct-empty button { margin-top:14px; }
+    .acct-reminder {
+      display:flex; align-items:flex-start; gap:12px; padding:14px 16px; border-radius:var(--r-md);
+      background:var(--brand-light); border:1.5px solid rgba(232,82,26,.25); margin-bottom:16px;
+    }
+    .acct-reminder .arm-icon { width:22px; height:22px; color:var(--brand); flex-shrink:0; margin-top:1px; }
+    .acct-reminder .arm-icon svg { width:22px; height:22px; fill:none; stroke:currentColor; stroke-width:2; }
+    .acct-reminder .arm-text { font-size:13px; color:var(--navy); }
+    .acct-reminder .arm-text b { display:block; font-size:13.5px; margin-bottom:2px; }
+    .acct-reminder button {
+      margin-top:8px; background:var(--navy); color:white; font-size:12px; font-weight:700;
+      padding:7px 14px; border-radius:var(--r-full);
+    }
+
+    .referral-card {
+      background:linear-gradient(135deg, var(--navy) 0%, #1E3A5F 100%); color:white;
+      border-radius:var(--r-lg); padding:22px; margin-bottom:18px;
+    }
+    .referral-card p { color:rgba(255,255,255,.75); font-size:12.5px; margin-bottom:10px; }
+    .referral-code-row { display:flex; align-items:center; gap:10px; }
+    .referral-code-box {
+      flex:1; background:rgba(255,255,255,.12); border:1.5px dashed rgba(255,255,255,.4);
+      border-radius:var(--r-sm); padding:10px 14px; font-weight:800; font-size:16px; letter-spacing:1px;
+    }
+    .referral-count { margin-top:14px; font-size:13px; color:rgba(255,255,255,.9); }
+    .referral-count b { color:white; font-size:16px; }
+    .referral-share-row { display:flex; gap:8px; margin-top:14px; }
+    .referral-share-row button, .referral-share-row a {
+      flex:1; text-align:center; font-size:12.5px; font-weight:700; padding:9px; border-radius:var(--r-sm);
+      display:flex; align-items:center; justify-content:center; gap:6px;
+    }
+    .referral-share-row .rs-copy { background:rgba(255,255,255,.15); color:white; }
+    .referral-share-row .rs-whatsapp { background:#25D366; color:white; }
+    .redeem-row { display:flex; gap:10px; margin-top:6px; }
+    .redeem-row input { flex:1; }
+    .redeem-row button { background:var(--brand); color:white; font-weight:700; font-size:13px; padding:0 16px; border-radius:var(--r-sm); }
+    .redeem-msg { font-size:12.5px; margin-top:8px; }
+
+    /* ════════════════ LOYALTY TIERS ════════════════ */
+    .loyalty-card {
+      border-radius:var(--r-lg); padding:22px; margin-bottom:18px; color:white;
+    }
+    .loyalty-card.tier-bronze { background:linear-gradient(135deg, #8C5A3C 0%, #6B4229 100%); }
+    .loyalty-card.tier-silver { background:linear-gradient(135deg, #8C97A6 0%, #5E6A78 100%); }
+    .loyalty-card.tier-gold { background:linear-gradient(135deg, #C99A3C 0%, #9C7420 100%); }
+    .loyalty-tier-name { font-family:var(--ff-h); font-size:22px; font-weight:900; display:flex; align-items:center; gap:8px; }
+    .loyalty-tier-name svg { width:22px; height:22px; }
+    .loyalty-sub { font-size:12.5px; color:rgba(255,255,255,.8); margin-top:4px; }
+    .loyalty-progress-wrap { margin-top:16px; }
+    .loyalty-progress-bar { height:8px; border-radius:var(--r-full); background:rgba(255,255,255,.2); overflow:hidden; }
+    .loyalty-progress-fill { height:100%; background:white; border-radius:var(--r-full); transition:width .4s ease; }
+    .loyalty-progress-label { font-size:11.5px; color:rgba(255,255,255,.85); margin-top:6px; }
+    .loyalty-perks { display:flex; flex-direction:column; gap:8px; }
+    .loyalty-perk {
+      display:flex; align-items:center; gap:10px; padding:12px 14px; border-radius:var(--r-md);
+      border:1.5px solid var(--border); font-size:13.5px; font-weight:600; color:var(--text);
+    }
+    .loyalty-perk.locked { color:var(--text-muted); opacity:.55; }
+    .loyalty-perk .lp-icon {
+      width:28px; height:28px; border-radius:50%; flex-shrink:0;
+      display:flex; align-items:center; justify-content:center; background:var(--g-100); color:var(--text-muted);
+    }
+    .loyalty-perk.unlocked .lp-icon { background:#E8F8F1; color:#22B37B; }
+    .loyalty-perk .lp-icon svg { width:14px; height:14px; fill:none; stroke:currentColor; stroke-width:2.5; }
+
     .overlay {
       position:fixed; inset:0; background:rgba(0,0,0,.55); z-index:800;
       display:flex; align-items:center; justify-content:center;
@@ -1100,7 +1360,8 @@
         </select>
       </div>
     </div>
-    <div class="form-group"><label>Address (optional)</label><input type="text" id="qAddress" placeholder="Coimbatore, Chennai, Madurai, Tirupur, Erode."></div>
+    <div class="form-group"><label>Address (With District & Area)</label><input type="text" id="qAddress" placeholder="Coimbatore, Chennai, Madurai, Tirupur, Erode."></div>
+    <div class="form-group"><label>Referral Code (optional)</label><input type="text" id="qReferral" placeholder="Have a friend's code? Enter it here — get ₹100 off" style="text-transform:uppercase"></div>
     <div class="form-group">
       <label id="qCaptchaLabel">Quick check — what is 3 + 4?</label>
       <input type="text" id="qCaptcha" placeholder="Type the answer" inputmode="numeric">
@@ -1112,6 +1373,62 @@
     </div>
     <button class="form-submit" id="qSubmitBtn" onclick="submitQuote()">Book Inspection →</button>
     <p id="qStatus" style="text-align:center;font-size:12px;color:var(--text-muted);margin-top:12px">🔒 No spam · 100% Free Inspection · 90-Day Warranty</p>
+  </div>
+</div>
+
+<!-- ─── MY ACCOUNT PANEL ─── -->
+<div class="overlay" id="acctOverlay" onclick="if(event.target===this)closeAccountPanel()">
+  <div class="popup">
+    <button class="popup-x" onclick="closeAccountPanel()">
+      <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <h3>My Account</h3>
+    <p>Your bookings, warranty status, and referral rewards — all in one place.</p>
+
+    <div id="acctLookupStep">
+      <div class="form-group">
+        <label>Enter the phone number you booked with</label>
+        <div class="acct-lookup-row">
+          <input type="tel" id="acctPhone" placeholder="+91 98765 43210">
+          <button onclick="lookupAccount()">View</button>
+        </div>
+      </div>
+      <p id="acctLookupMsg" style="font-size:12.5px;color:var(--text-muted)"></p>
+    </div>
+
+    <div id="acctDashboard" style="display:none">
+      <div class="acct-tabs">
+        <div class="acct-tab active" id="tabHistoryBtn" onclick="switchAccountTab('history')">Service History</div>
+        <div class="acct-tab" id="tabLoyaltyBtn" onclick="switchAccountTab('loyalty')">Loyalty</div>
+        <div class="acct-tab" id="tabReferralBtn" onclick="switchAccountTab('referral')">Referral Program</div>
+      </div>
+
+      <div id="tabHistory"></div>
+      <div id="tabLoyalty" style="display:none"></div>
+      <div id="tabReferral" style="display:none"></div>
+
+      <p style="text-align:center;margin-top:16px">
+        <a href="#" onclick="switchAccount(); return false;" style="font-size:12.5px;color:var(--text-muted);text-decoration:underline">Not you? Switch number</a>
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- ─── SERVICE VIDEO PREVIEW MODAL ─── -->
+<div class="overlay" id="videoOverlay" onclick="if(event.target===this)closeServiceVideo()">
+  <div class="popup" style="max-width:520px;">
+    <button class="popup-x" onclick="closeServiceVideo()">
+      <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <h3 id="videoModalTitle">Service Preview</h3>
+    <div class="video-player" style="margin-top:14px;">
+      <video id="videoModalTag" controls playsinline preload="none" style="width:100%;height:100%;">
+        Your browser doesn't support embedded video.
+      </video>
+    </div>
+    <p style="font-size:12px;color:var(--text-muted);margin-top:12px;text-align:center">
+      Placeholder preview — swap the video source with a real short clip for this service.
+    </p>
   </div>
 </div>
 
@@ -1131,10 +1448,11 @@
       </div>
     </a>
 
-    <div class="nav-search">
+    <div class="nav-search search-wrap-rel" id="navSearchWrap">
       <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-      <input type="text" placeholder="Search for AC repair, washing machine…" id="searchInput">
+      <input type="text" placeholder="Search for AC repair, washing machine…" id="searchInput" autocomplete="off">
       <button onclick="openPopup()">Search</button>
+      <div class="search-suggest" id="navSearchSuggest"></div>
     </div>
 
     <div class="nav-links">
@@ -1142,6 +1460,7 @@
       <a href="#how-it-works">How It Works</a>
       <a href="#pricing">Pricing</a>
       <a href="#testimonials">Reviews</a>
+      <a href="#" onclick="openAccountPanel(); return false;">My Account</a>
       <a href="tel:+918098606019" class="nav-call">
         <svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1l-2.3 2.2z"/></svg>
         +91 80986 06019
@@ -1158,6 +1477,7 @@
     <a href="#how-it-works" onclick="closeMenu()">How It Works</a>
     <a href="#pricing" onclick="closeMenu()">Pricing</a>
     <a href="#testimonials" onclick="closeMenu()">Reviews</a>
+    <a href="#" onclick="closeMenu(); openAccountPanel(); return false;">My Account</a>
     <a href="tel:+918098606019" class="nav-call">
       <svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1l-2.3 2.2z"/></svg>
       Call Now – For Inspection
@@ -1168,21 +1488,7 @@
 <!-- ════════════════════════════════════════
   HERO + SERVICES
 ════════════════════════════════════════ -->
-<section class="hero hero-simple" id="home">
 
-  <div class="hero-inner">
-    <div class="hero-top reveal">
-      <div class="hero-search-wrap" style="margin-bottom:0;">
-        <div class="hero-search-bar">
-          <svg viewBox="0 0 24 24"><path d="M21 21l-4.35-4.35M17 11a6 6 0 11-12 0 6 6 0 0112 0z" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
-          <input type="text" placeholder="Search for AC repair, washing machine, RO service…" id="heroSearchInput">
-          <button onclick="openPopup()">Search</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="section-divider"></div>
 
   <!-- OFFERS & DISCOUNTS (UC style) -->
   <div class="offers-wrap reveal">
@@ -1232,6 +1538,23 @@
 
   <div class="section-divider"></div>
 
+  <!-- APPLIANCE DIAGNOSTIC QUIZ -->
+  <div class="diag-wrap reveal" id="diagnose">
+    <div class="hero-inner" style="padding:0;">
+      <div class="section-top" style="margin-bottom:18px;">
+        <h2>Not sure what's wrong?</h2>
+      </div>
+      <div class="diag-card">
+        <div class="diag-progress" id="diagProgress"></div>
+        <div id="diagStepBox"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-divider"></div>
+
+  
+  
   <!-- MOST BOOKED SERVICES (UC style) -->
   <div class="services-grid-wrap reveal" id="services">
     <div class="section-top">
@@ -1240,49 +1563,63 @@
     </div>
     <div class="mbs-scroll">
       <div class="mbs-card" onclick="openPopup()">
-        <div class="mbs-img"><img src="ac-repair.png" alt="AC Repair"></div>
+        <div class="mbs-img"><img src="ac-repair.png" alt="AC Repair">
+          <span class="mbs-play-badge" onclick="event.stopPropagation();openServiceVideo('AC General Service','ac-general-preview.mp4')"><svg viewBox="0 0 24 24"><polygon points="6 4 20 12 6 20"/></svg></span>
+        </div>
         <div class="mbs-body">
           <div class="mbs-label">AC General Service</div>
           <div class="mbs-sub">From ₹249</div>
         </div>
       </div>
       <div class="mbs-card" onclick="openPopup()">
-        <div class="mbs-img"><img src="ac-cleaning.png" alt="AC Cleaning"></div>
+        <div class="mbs-img"><img src="ac-cleaning.png" alt="AC Cleaning">
+          <span class="mbs-play-badge" onclick="event.stopPropagation();openServiceVideo('AC Jet Wash','ac-jetwash-preview.mp4')"><svg viewBox="0 0 24 24"><polygon points="6 4 20 12 6 20"/></svg></span>
+        </div>
         <div class="mbs-body">
           <div class="mbs-label">AC Jet Wash</div>
           <div class="mbs-sub">From ₹499</div>
         </div>
       </div>
       <div class="mbs-card" onclick="openPopup()">
-        <div class="mbs-img"><img src="ac-install.jpg" alt="AC Install"></div>
+        <div class="mbs-img"><img src="ac-install.jpg" alt="AC Install">
+          <span class="mbs-play-badge" onclick="event.stopPropagation();openServiceVideo('AC Install','ac-install-preview.mp4')"><svg viewBox="0 0 24 24"><polygon points="6 4 20 12 6 20"/></svg></span>
+        </div>
         <div class="mbs-body">
           <div class="mbs-label">AC Install</div>
           <div class="mbs-sub">From ₹1200</div>
         </div>
       </div>
       <div class="mbs-card" onclick="openPopup()">
-        <div class="mbs-img"><img src="washing-machine.png" alt="Washing Machine"></div>
+        <div class="mbs-img"><img src="washing-machine.png" alt="Washing Machine">
+          <span class="mbs-play-badge" onclick="event.stopPropagation();openServiceVideo('Washing Machine Service','washing-machine-preview.mp4')"><svg viewBox="0 0 24 24"><polygon points="6 4 20 12 6 20"/></svg></span>
+        </div>
         <div class="mbs-body">
           <div class="mbs-label">Washing Machine Service</div>
           <div class="mbs-sub">From ₹249</div>
         </div>
       </div>
       <div class="mbs-card" onclick="openPopup()">
-        <div class="mbs-img"><img src="refrigerator.png" alt="Refrigerator"></div>
+        <div class="mbs-img"><img src="refrigerator.png" alt="Refrigerator">
+          <span class="mbs-play-badge" onclick="event.stopPropagation();openServiceVideo('Refrigerator Service','refrigerator-preview.mp4')"><svg viewBox="0 0 24 24"><polygon points="6 4 20 12 6 20"/></svg></span>
+        </div>
         <div class="mbs-body">
           <div class="mbs-label">Refrigerator Service</div>
           <div class="mbs-sub">From ₹249</div>
         </div>
       </div>
       <div class="mbs-card" onclick="openPopup()">
-        <div class="mbs-img"><img src="water-heater.png" alt="Water Heater"></div>
+        <div class="mbs-img"><img src="water-heater.png" alt="Water Heater">
+          <span class="mbs-play-badge" onclick="event.stopPropagation();openServiceVideo('Water Heater Service','water-heater-preview.mp4')"><svg viewBox="0 0 24 24"><polygon points="6 4 20 12 6 20"/></svg></span>
+        </div>
         <div class="mbs-body">
           <div class="mbs-label">Water Heater Service</div>
           <div class="mbs-sub">From ₹249</div>
         </div>
       </div>
       <div class="mbs-card" onclick="openPopup()">
-        <div class="mbs-img"><img src="ro-purifier.png" alt="RO Purifier"></div>
+        <div class="mbs-img"><img src="ro-purifier.png" alt="RO Purifier">
+          <span class="mbs-play-badge" onclick="event.stopPropagation();openServiceVideo('RO Purifier Service','ro-purifier-preview.mp4')"><svg viewBox="0 0 24 24"><polygon points="6 4 20 12 6 20"/></svg></span>
+        </div>
         <div class="mbs-body">
           <div class="mbs-label">RO Purifier Service</div>
           <div class="mbs-sub">From ₹299</div>
@@ -1379,7 +1716,7 @@
     <div class="pop-grid">
       <div class="pop-card reveal" style="transition-delay:.1s">
         <div class="pop-img" style="background:linear-gradient(135deg,#EFF4FF,#DBEAFE)">
-           <img src="ac-repair-service-pop.png" alt="AC Repair">
+           <img src="ac-repair-service-pop.jpeg" alt="AC Repair">
           <span class="pop-img-badge">⚡ Same Day</span>
         </div>
         <div class="pop-body">
@@ -1409,7 +1746,7 @@
       </div>
       <div class="pop-card reveal" style="transition-delay:.3s">
         <div class="pop-img" style="background:linear-gradient(135deg,#F0FDF4,#DCFCE7)">
-           <img src="refridgerator-service-pop.png" alt="Refrigerator">
+           <img src="refridgerator-service-pop.jpeg" alt="Refrigerator">
           <span class="pop-img-badge">⭐ Top Rated</span>
         </div>
         <div class="pop-body">
@@ -1466,6 +1803,26 @@ Includes cooling check.</p>
         </div>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+  VIDEO EXPLAINER
+════════════════════════════════════════ -->
+<section class="video-section">
+  <div class="video-inner reveal">
+    <div class="section-label"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> See how it works</div>
+    <h2 class="section-h">30 seconds to understand FixNow</h2>
+    <p class="video-sub">From booking to a warrantied repair — here's the whole journey.</p>
+    <div class="video-player" id="explainerVideo" onclick="playExplainer()">
+      <img class="video-poster" src="ac-jet-wash-pop.png" alt="FixNow service preview">
+      <video id="explainerVideoTag" playsinline preload="none" controls>
+        <source src="ac sample video.mp4" type="video/mp4">
+        Your browser doesn't support embedded video.
+      </video>
+      <div class="video-play-btn"><svg viewBox="0 0 24 24"><polygon points="6 4 20 12 6 20"/></svg></div>
+    </div>
+    <p class="video-caption">Replace <code>fixnow-explainer.mp4</code> with your real 30-second video file.</p>
   </div>
 </section>
 
@@ -2154,6 +2511,7 @@ Cooling Efficiency Testing</div>
       ? new Date(dateVal + 'T00:00:00').toLocaleDateString('en-IN', { day:'numeric', month:'short', year:'numeric' }) + (timeSlot ? ' – ' + timeSlot : '')
       : timeSlot;
     const address = document.getElementById('qAddress').value.trim();
+    const referralCode = document.getElementById('qReferral').value.trim().toUpperCase();
     const captcha = document.getElementById('qCaptcha').value.trim();
     const honeypot = document.getElementById('qWebsite').value.trim();
     const status  = document.getElementById('qStatus');
@@ -2221,7 +2579,10 @@ Cooling Efficiency Testing</div>
 
     // We can't read the iframe's cross-origin response, so we optimistically confirm.
     setTimeout(() => {
-      status.textContent = '✅ Thank you! Our team will call you in 15 minutes. ☎️';
+      const referralResult = saveBookingRecord({ name, phone, service, time, address, referralCode });
+      status.textContent = referralResult
+        ? '✅ Thank you! ₹100 referral discount applied. Our team will call you in 15 minutes. ☎️'
+        : '✅ Thank you! Our team will call you in 15 minutes. ☎️';
       status.style.color = 'var(--green)';
       btn.textContent = 'Booked ✓';
       setTimeout(() => {
@@ -2232,6 +2593,7 @@ Cooling Efficiency Testing</div>
         document.getElementById('qDate').value = '';
         document.getElementById('qTime').value = '';
         document.getElementById('qAddress').value = '';
+        document.getElementById('qReferral').value = '';
         newCaptcha();
         btn.disabled = false;
         btn.textContent = 'Book Inspection →';
@@ -2240,6 +2602,442 @@ Cooling Efficiency Testing</div>
       }, 1800);
     }, 900);
   }
+</script>
+<script>
+  /* ════ SERVICE HISTORY + REFERRAL PROGRAM (localStorage-backed) ════ */
+  const BOOKINGS_KEY = 'fixnow_bookings';
+  const REFERRALS_KEY = 'fixnow_referral_data';
+  let acctCurrentPhone = null;
+
+  function normPhone(p) { return (p || '').replace(/\D/g, '').slice(-10); }
+
+  function loadBookings() {
+    try { return JSON.parse(localStorage.getItem(BOOKINGS_KEY)) || []; } catch (e) { return []; }
+  }
+  function loadReferrals() {
+    try { return JSON.parse(localStorage.getItem(REFERRALS_KEY)) || {}; } catch (e) { return {}; }
+  }
+  function saveReferrals(data) { localStorage.setItem(REFERRALS_KEY, JSON.stringify(data)); }
+
+  function referralCodeFor(phone) {
+    const n = normPhone(phone);
+    return 'FN' + (n ? n.slice(-4) : '0000');
+  }
+
+  // Saves a booking to local history and applies a referral code if valid. Returns true if a discount was applied.
+  function saveBookingRecord({ name, phone, service, time, address, referralCode }) {
+    const bookings = loadBookings();
+    const bookedAt = new Date();
+    const warrantyUntil = new Date(bookedAt.getTime() + 90 * 24 * 60 * 60 * 1000);
+    bookings.unshift({
+      id: 'bk_' + Date.now(),
+      name, phone: normPhone(phone), service, time, address,
+      bookedAt: bookedAt.toISOString(),
+      warrantyUntil: warrantyUntil.toISOString()
+    });
+    localStorage.setItem(BOOKINGS_KEY, JSON.stringify(bookings));
+
+    let discountApplied = false;
+    const myPhone = normPhone(phone);
+    const myCode = referralCodeFor(myPhone);
+    if (referralCode && /^FN\d{4}$/.test(referralCode) && referralCode !== myCode) {
+      const referrals = loadReferrals();
+      if (!referrals[myPhone]) referrals[myPhone] = { referredCount: 0, redeemedCode: null };
+      if (!referrals[myPhone].redeemedCode) {
+        referrals[myPhone].redeemedCode = referralCode;
+        // Credit whoever owns that code, if we can find them among known accounts
+        Object.keys(referrals).forEach(p => {
+          if (referralCodeFor(p) === referralCode) {
+            referrals[p].referredCount = (referrals[p].referredCount || 0) + 1;
+          }
+        });
+        saveReferrals(referrals);
+        discountApplied = true;
+      }
+    }
+    // Ensure this phone has a referral record even with no redemption
+    const referrals2 = loadReferrals();
+    if (!referrals2[myPhone]) { referrals2[myPhone] = { referredCount: 0, redeemedCode: null }; saveReferrals(referrals2); }
+    return discountApplied;
+  }
+
+  function openAccountPanel() {
+    document.getElementById('acctOverlay').classList.add('open');
+  }
+  function closeAccountPanel() {
+    document.getElementById('acctOverlay').classList.remove('open');
+  }
+  function switchAccount() {
+    acctCurrentPhone = null;
+    document.getElementById('acctDashboard').style.display = 'none';
+    document.getElementById('acctLookupStep').style.display = 'block';
+    document.getElementById('acctPhone').value = '';
+    document.getElementById('acctLookupMsg').textContent = '';
+  }
+
+  function lookupAccount() {
+    const phone = normPhone(document.getElementById('acctPhone').value);
+    const msg = document.getElementById('acctLookupMsg');
+    if (phone.length < 10) {
+      msg.textContent = '⚠️ Please enter a valid 10-digit phone number.';
+      msg.style.color = '#C43F0E';
+      return;
+    }
+    acctCurrentPhone = phone;
+    document.getElementById('acctLookupStep').style.display = 'none';
+    document.getElementById('acctDashboard').style.display = 'block';
+    switchAccountTab('history');
+  }
+
+  function switchAccountTab(tab) {
+    document.getElementById('tabHistoryBtn').classList.toggle('active', tab === 'history');
+    document.getElementById('tabLoyaltyBtn').classList.toggle('active', tab === 'loyalty');
+    document.getElementById('tabReferralBtn').classList.toggle('active', tab === 'referral');
+    document.getElementById('tabHistory').style.display = tab === 'history' ? 'block' : 'none';
+    document.getElementById('tabLoyalty').style.display = tab === 'loyalty' ? 'block' : 'none';
+    document.getElementById('tabReferral').style.display = tab === 'referral' ? 'block' : 'none';
+    if (tab === 'history') renderHistory();
+    else if (tab === 'loyalty') renderLoyalty();
+    else renderReferral();
+  }
+
+  function buildReminderBanner(mine, now) {
+    // Reminder 1: warranty expiring within 14 days
+    const soonExpiring = mine
+      .map(b => ({ b, warrantyDate: new Date(b.warrantyUntil) }))
+      .filter(x => x.warrantyDate > now && (x.warrantyDate - now) < 14 * 24 * 60 * 60 * 1000)
+      .sort((a, c) => a.warrantyDate - c.warrantyDate)[0];
+
+    if (soonExpiring) {
+      const dStr = soonExpiring.warrantyDate.toLocaleDateString('en-IN', { day:'numeric', month:'short' });
+      return '<div class="acct-reminder"><span class="arm-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v6l4 2"/></svg></span>' +
+        '<div class="arm-text"><b>Warranty ending soon</b>Your warranty on ' + soonExpiring.b.service + ' ends ' + dStr + '. Book a free re-check before it lapses.' +
+        '<br><button onclick="closeAccountPanel();openPopup()">Book Re-check</button></div></div>';
+    }
+
+    // Reminder 2: most recent AC-related service older than 150 days
+    const latestAc = mine.find(b => /ac /i.test(b.service) || /^ac/i.test(b.service));
+    if (latestAc) {
+      const daysSince = (now - new Date(latestAc.bookedAt)) / (24 * 60 * 60 * 1000);
+      if (daysSince > 150) {
+        return '<div class="acct-reminder"><span class="arm-icon"><svg viewBox="0 0 24 24"><path d="M12 3v3M12 18v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M3 12h3M18 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg></span>' +
+          '<div class="arm-text"><b>Time for your next AC service</b>It\'s been ' + Math.floor(daysSince) + ' days since your last AC service — regular servicing keeps cooling efficient.' +
+          '<br><button onclick="closeAccountPanel();openPopup()">Book AC Service</button></div></div>';
+      }
+    }
+    return '';
+  }
+
+  function renderHistory() {
+    const box = document.getElementById('tabHistory');
+    const mine = loadBookings().filter(b => b.phone === acctCurrentPhone);
+    if (!mine.length) {
+      box.innerHTML = '<div class="acct-empty">No bookings yet under this number.<br>Book your first service to see it here!<br>' +
+        '<button class="form-submit" style="margin-top:14px;width:auto;padding:10px 22px" onclick="closeAccountPanel();openPopup()">Book a Service</button></div>';
+      return;
+    }
+    const now = new Date();
+    const reminderHtml = buildReminderBanner(mine, now);
+    box.innerHTML = reminderHtml + mine.map(b => {
+      const warrantyDate = new Date(b.warrantyUntil);
+      const active = warrantyDate > now;
+      const dateStr = new Date(b.bookedAt).toLocaleDateString('en-IN', { day:'numeric', month:'short', year:'numeric' });
+      const warrantyStr = active
+        ? 'Warranty till ' + warrantyDate.toLocaleDateString('en-IN', { day:'numeric', month:'short' })
+        : 'Warranty expired';
+      return '<div class="acct-history-item">' +
+        '<span class="ahi-icon"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.4-3.4a4 4 0 01-5.6 5.6L6.6 20.4a2 2 0 01-2.8-2.8L12.7 8.7a4 4 0 015.6-5.6l-3.4 3.4z"/></svg></span>' +
+        '<div class="ahi-main"><div class="ahi-service">' + b.service + '</div><div class="ahi-date">' + dateStr + (b.address ? ' · ' + b.address : '') + '</div></div>' +
+        '<span class="ahi-warranty ' + (active ? 'active' : 'expired') + '">' + warrantyStr + '</span>' +
+      '</div>';
+    }).join('');
+  }
+
+  const loyaltyTiers = [
+    { name: 'Bronze', min: 0, icon: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/></svg>' },
+    { name: 'Silver', min: 3, icon: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M7 12h10"/></svg>' },
+    { name: 'Gold', min: 6, icon: '<svg viewBox="0 0 24 24"><path d="M12 2l2.6 6.4L21 9l-5 4.6L17.4 21 12 17.3 6.6 21 8 13.6 3 9l6.4-.6z"/></svg>' }
+  ];
+  const loyaltyPerks = [
+    { minTier: 0, label: '90-day warranty on every repair' },
+    { minTier: 0, label: 'Standard scheduling' },
+    { minTier: 1, label: 'Priority slot booking' },
+    { minTier: 1, label: '5% off AC gas filling' },
+    { minTier: 2, label: 'Free filter cleaning with every AC service' },
+    { minTier: 2, label: 'Dedicated priority support line' }
+  ];
+
+  function tierIndexForCount(count) {
+    let idx = 0;
+    loyaltyTiers.forEach((t, i) => { if (count >= t.min) idx = i; });
+    return idx;
+  }
+
+  function renderLoyalty() {
+    const box = document.getElementById('tabLoyalty');
+    const count = loadBookings().filter(b => b.phone === acctCurrentPhone).length;
+    const tierIdx = tierIndexForCount(count);
+    const tier = loyaltyTiers[tierIdx];
+    const nextTier = loyaltyTiers[tierIdx + 1];
+
+    const progressPct = nextTier ? Math.min(100, Math.round((count / nextTier.min) * 100)) : 100;
+    const progressLabel = nextTier
+      ? (nextTier.min - count) + ' more booking' + (nextTier.min - count === 1 ? '' : 's') + ' to reach ' + nextTier.name
+      : 'You\'ve reached the top tier!';
+
+    box.innerHTML =
+      '<div class="loyalty-card tier-' + tier.name.toLowerCase() + '">' +
+        '<div class="loyalty-tier-name">' + tier.icon + tier.name + ' Member</div>' +
+        '<div class="loyalty-sub">' + count + ' service' + (count === 1 ? '' : 's') + ' booked with FixNow</div>' +
+        '<div class="loyalty-progress-wrap">' +
+          '<div class="loyalty-progress-bar"><div class="loyalty-progress-fill" style="width:' + progressPct + '%"></div></div>' +
+          '<div class="loyalty-progress-label">' + progressLabel + '</div>' +
+        '</div>' +
+      '</div>' +
+      '<div class="loyalty-perks">' +
+        loyaltyPerks.map(p => {
+          const unlocked = tierIdx >= p.minTier;
+          return '<div class="loyalty-perk ' + (unlocked ? 'unlocked' : 'locked') + '">' +
+            '<span class="lp-icon"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></span>' +
+            p.label + (unlocked ? '' : ' — unlocks at ' + loyaltyTiers[p.minTier].name) +
+          '</div>';
+        }).join('') +
+      '</div>';
+  }
+
+  function renderReferral() {
+    const box = document.getElementById('tabReferral');
+    const code = referralCodeFor(acctCurrentPhone);
+    const referrals = loadReferrals();
+    const mine = referrals[acctCurrentPhone] || { referredCount: 0, redeemedCode: null };
+    const waText = encodeURIComponent('Hey! Use my FixNow Home Care referral code ' + code + ' and get ₹100 off your first AC/appliance service booking. Book here: ' + location.href);
+
+    box.innerHTML =
+      '<div class="referral-card">' +
+        '<p>Share your code — you and your friend both get ₹100 off.</p>' +
+        '<div class="referral-code-row">' +
+          '<div class="referral-code-box" id="referralCodeText">' + code + '</div>' +
+        '</div>' +
+        '<div class="referral-share-row">' +
+          '<button class="rs-copy" onclick="copyReferralCode(\'' + code + '\')">📋 Copy Code</button>' +
+          '<a class="rs-whatsapp" href="https://wa.me/?text=' + waText + '" target="_blank" rel="noopener">💬 Share on WhatsApp</a>' +
+        '</div>' +
+        '<div class="referral-count">Friends referred so far: <b>' + (mine.referredCount || 0) + '</b></div>' +
+      '</div>' +
+      (mine.redeemedCode
+        ? '<p style="font-size:12.5px;color:var(--text-muted)">You\'ve already redeemed a friend\'s code (' + mine.redeemedCode + ') — ₹100 off was applied on that booking.</p>'
+        : '<div class="form-group"><label>Have a friend\'s code? Redeem it on your next booking</label>' +
+          '<p style="font-size:12.5px;color:var(--text-muted);margin-top:-4px">Just enter it in the "Referral Code" field when you book your next service.</p></div>');
+  }
+
+  function copyReferralCode(code) {
+    navigator.clipboard.writeText(code).then(() => {
+      const el = document.getElementById('referralCodeText');
+      const original = el.textContent;
+      el.textContent = 'Copied!';
+      setTimeout(() => { el.textContent = original; }, 1200);
+    }).catch(() => {});
+  }
+</script>
+<script>
+  /* ════ APPLIANCE DIAGNOSTIC QUIZ ════ */
+  const diagFlow = {
+    start: {
+      question: "What's going on with your appliance?",
+      options: [
+        { label: "AC not cooling", next: "ac_noise" },
+        { label: "Strange noise", next: "noise_appliance" },
+        { label: "Water leakage", next: "leak_appliance" },
+        { label: "Not turning on", next: "power_appliance" }
+      ]
+    },
+    ac_noise: {
+      question: "Is it also making an unusual noise?",
+      options: [
+        { label: "Yes, quite loud", result: "ac_gas_noise" },
+        { label: "No, just not cooling", result: "ac_gas" }
+      ]
+    },
+    noise_appliance: {
+      question: "Which appliance is making the noise?",
+      options: [
+        { label: "AC", result: "ac_general" },
+        { label: "Washing machine", result: "wm_general" },
+        { label: "Refrigerator", result: "fridge_general" }
+      ]
+    },
+    leak_appliance: {
+      question: "Which appliance is leaking?",
+      options: [
+        { label: "AC (water dripping)", result: "ac_install_check" },
+        { label: "Washing machine", result: "wm_general" },
+        { label: "RO Purifier", result: "ro_service" }
+      ]
+    },
+    power_appliance: {
+      question: "Which appliance won't turn on?",
+      options: [
+        { label: "AC", result: "ac_electrical" },
+        { label: "Washing machine", result: "wm_general" },
+        { label: "Water heater / Geyser", result: "geyser_service" }
+      ]
+    }
+  };
+  const diagResults = {
+    ac_gas_noise: { title: "Likely low refrigerant + a loose part", service: "AC Repair & Cleaning", price: "From ₹349", note: "Noise plus poor cooling usually means a gas top-up along with a quick tightening check." },
+    ac_gas: { title: "Likely low refrigerant gas", service: "AC Repair & Cleaning", price: "From ₹799", note: "Cooling drops off gradually when gas runs low — a refill usually fixes it." },
+    ac_general: { title: "Needs a deep clean & service", service: "AC Repair & Cleaning", price: "From ₹249", note: "A noisy AC unit is often just due for a filter and coil clean." },
+    wm_general: { title: "Needs a technician visit", service: "Washing Machine Repair", price: "From ₹249", note: "Could be a belt, bearing, or drain issue — best diagnosed on-site." },
+    fridge_general: { title: "Needs a check-up", service: "Refrigerator Service", price: "From ₹249", note: "A hum or rattle is usually solved with a routine service." },
+    ac_install_check: { title: "Possible installation issue", service: "AC Installation", price: "From ₹1200", note: "Dripping often means the drain pipe or mounting needs adjustment." },
+    ro_service: { title: "Filter or valve issue likely", service: "RO Water Purifier", price: "From ₹299", note: "Leaks are commonly from a worn valve or filter housing." },
+    ac_electrical: { title: "Electrical fault likely", service: "Electrical Services", price: "From ₹199", note: "Could be a tripped breaker, capacitor, or wiring issue." },
+    geyser_service: { title: "Needs inspection", service: "Water Heater Repair", price: "From ₹299", note: "No power could be a thermostat, heating element, or wiring fault." }
+  };
+
+  let diagPath = ['start'];
+  const diagIconSvg = '<svg viewBox="0 0 24 24"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"/></svg>';
+
+  function diagRenderProgress() {
+    const total = 3;
+    const step = Math.min(diagPath.length, total);
+    const bar = document.getElementById('diagProgress');
+    bar.innerHTML = Array.from({ length: total }).map((_, i) =>
+      '<span class="' + (i < step ? 'done' : '') + '"></span>'
+    ).join('');
+  }
+
+  function diagRenderStep(animate) {
+    diagRenderProgress();
+    const box = document.getElementById('diagStepBox');
+    const current = diagPath[diagPath.length - 1];
+
+    function paint() {
+      if (diagResults[current]) {
+        const r = diagResults[current];
+        box.innerHTML =
+          (diagPath.length > 1 ? '<div class="diag-back" onclick="diagBack()">← Back</div>' : '') +
+          '<div class="diag-step">' +
+            '<div class="diag-result-icon">' + diagIconSvg + '</div>' +
+            '<div class="diag-result-title">' + r.title + '</div>' +
+            '<div class="diag-result-note">' + r.note + '</div>' +
+            '<div class="diag-result-service"><b>' + r.service + '</b><span>' + r.price + '</span></div>' +
+            '<button class="form-submit" onclick="diagBookNow(\'' + r.service.replace(/'/g, "\\'") + '\')">Book This Service →</button>' +
+            '<p style="text-align:center;margin-top:12px"><span class="diag-restart" onclick="diagRestart()">Start over</span></p>' +
+          '</div>';
+      } else {
+        const step = diagFlow[current];
+        box.innerHTML =
+          (diagPath.length > 1 ? '<div class="diag-back" onclick="diagBack()">← Back</div>' : '') +
+          '<div class="diag-step">' +
+            '<div class="diag-q">' + step.question + '</div>' +
+            step.options.map((o, i) => '<div class="diag-opt" onclick="diagChoose(' + i + ')">' + o.label + '</div>').join('') +
+          '</div>';
+      }
+    }
+
+    if (animate) {
+      const existing = box.querySelector('.diag-step');
+      if (existing) {
+        existing.classList.add('leaving');
+        setTimeout(paint, 200);
+      } else { paint(); }
+    } else { paint(); }
+  }
+
+  function diagChoose(i) {
+    const current = diagFlow[diagPath[diagPath.length - 1]];
+    const opt = current.options[i];
+    diagPath.push(opt.next || opt.result);
+    diagRenderStep(true);
+  }
+  function diagBack() {
+    diagPath.pop();
+    diagRenderStep(true);
+  }
+  function diagRestart() {
+    diagPath = ['start'];
+    diagRenderStep(true);
+  }
+  function diagBookNow(serviceName) {
+    const sel = document.getElementById('qService');
+    if (sel && [...sel.options].some(o => o.value === serviceName)) sel.value = serviceName;
+    openPopup();
+  }
+  diagRenderStep(false);
+
+  /* ════ BEFORE / AFTER SLIDER ════ */
+  (function () {
+    const slider = document.getElementById('baSlider');
+    const after = slider.querySelector('.ba-after');
+    const handle = document.getElementById('baHandle');
+    let dragging = false;
+
+    function setPct(pct) {
+      pct = Math.max(0, Math.min(100, pct));
+      after.style.clipPath = 'inset(0 0 0 ' + pct + '%)';
+      handle.style.left = pct + '%';
+    }
+    function pctFromEvent(e) {
+      const rect = slider.getBoundingClientRect();
+      const x = (e.touches ? e.touches[0].clientX : e.clientX) - rect.left;
+      return (x / rect.width) * 100;
+    }
+    slider.addEventListener('mousedown', e => { dragging = true; setPct(pctFromEvent(e)); });
+    window.addEventListener('mousemove', e => { if (dragging) setPct(pctFromEvent(e)); });
+    window.addEventListener('mouseup', () => { dragging = false; });
+    slider.addEventListener('touchstart', e => { dragging = true; setPct(pctFromEvent(e)); });
+    slider.addEventListener('touchmove', e => { if (dragging) setPct(pctFromEvent(e)); });
+    slider.addEventListener('touchend', () => { dragging = false; });
+  })();
+
+  /* ════ VIDEO EXPLAINER ════ */
+  function playExplainer() {
+    const wrap = document.getElementById('explainerVideo');
+    const tag = document.getElementById('explainerVideoTag');
+    wrap.classList.add('playing');
+    tag.play().catch(() => {});
+  }
+
+  /* ════ SERVICE VIDEO PREVIEW MODAL ════ */
+  function openServiceVideo(title, src) {
+    document.getElementById('videoModalTitle').textContent = title + ' — Preview';
+    const tag = document.getElementById('videoModalTag');
+    tag.querySelectorAll('source').forEach(s => s.remove());
+    const source = document.createElement('source');
+    source.src = src;
+    source.type = 'video/mp4';
+    tag.appendChild(source);
+    tag.load();
+    document.getElementById('videoOverlay').classList.add('open');
+  }
+  function closeServiceVideo() {
+    const tag = document.getElementById('videoModalTag');
+    tag.pause();
+    document.getElementById('videoOverlay').classList.remove('open');
+  }
+
+  /* ════ SKELETON LOADING STATES ════ */
+  function wireImageSkeletons() {
+    const wrapperSelectors = '.mbs-img, .offer-img, .pop-img';
+    document.querySelectorAll(wrapperSelectors).forEach(wrap => {
+      const img = wrap.querySelector('img');
+      if (!img) return;
+      wrap.classList.add('skeleton');
+      img.classList.add('img-loading');
+      function done() {
+        wrap.classList.remove('skeleton');
+        img.classList.remove('img-loading');
+        img.classList.add('img-loaded');
+      }
+      if (img.complete && img.naturalWidth > 0) { done(); }
+      else {
+        img.addEventListener('load', done);
+        img.addEventListener('error', done);
+      }
+    });
+  }
+  wireImageSkeletons();
 </script>
 <script>
 const cities = [
@@ -2292,6 +3090,187 @@ function typeEffect() {
 
 input.placeholder = "";
 typeEffect();
+</script>
+<script>
+  /* ════ LIVE SEARCH SUGGESTIONS (Urban Company style — services only) ════ */
+  const svcList = [
+    { name: "AC General Service", price: "From ₹249", bg: "#EAF1FE", fg: "#2F6FE0",
+      icon: "M12 3v3M12 18v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M3 12h3M18 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1" },
+    { name: "AC Repair", price: "From ₹349", bg: "#EAF1FE", fg: "#2F6FE0",
+      icon: "M12 3v3M12 18v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M3 12h3M18 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1" },
+    { name: "AC Installation", price: "From ₹1200", bg: "#EAF1FE", fg: "#2F6FE0",
+      icon: "M12 3v3M12 18v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M3 12h3M18 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1" },
+    { name: "AC Gas Filling", price: "From ₹799", bg: "#EAF1FE", fg: "#2F6FE0",
+      icon: "M12 3v3M12 18v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M3 12h3M18 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1" },
+    { name: "Washing Machine Repair", price: "From ₹249", bg: "#E6F7F6", fg: "#0EA5A0",
+      icon: "M4 4h16v16H4z M12 14a4 4 0 100-8 4 4 0 000 8z M7 7h.01" },
+    { name: "Refrigerator Service", price: "From ₹249", bg: "#F1EDFF", fg: "#7C5CFC",
+      icon: "M6 3h12v18H6z M6 10h12" },
+    { name: "Water Heater / Geyser Service", price: "From ₹299", bg: "#FEF1E6", fg: "#F5883C",
+      icon: "M12 2c3 4-3 6-3 10a3 3 0 006 0c0-1.5-1-2.5-1-4" },
+    { name: "RO Purifier Service", price: "From ₹299", bg: "#E8F8F1", fg: "#22B37B",
+      icon: "M12 2l7 4v6c0 5-3 8-7 10-4-2-7-5-7-10V6z" },
+    { name: "Electrical Repair", price: "From ₹199", bg: "#FDF3DC", fg: "#D69700",
+      icon: "M13 2 3 14h7l-1 8 10-12h-7z" }
+  ];
+  const popularSearches = ["AC General Service", "Washing Machine Repair", "Refrigerator Service", "RO Purifier Service"];
+
+  function iconSvg(path) {
+    return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">' + path.split('M').filter(Boolean).map(d => '<path d="M' + d.trim() + '"/>').join('') + '</svg>';
+  }
+
+  function buildSuggestions(query) {
+    const q = query.trim().toLowerCase();
+    if (!q) return [];
+    return svcList.filter(s => s.name.toLowerCase().includes(q)).slice(0, 6);
+  }
+
+  function wireSearchSuggest(inputId, boxId) {
+    const inputEl = document.getElementById(inputId);
+    const boxEl = document.getElementById(boxId);
+    const wrapEl = inputEl ? inputEl.closest('.search-wrap-rel') : null;
+    if (!inputEl || !boxEl || !wrapEl) return;
+
+    function position() {
+      const r = wrapEl.getBoundingClientRect();
+      boxEl.style.left = r.left + 'px';
+      boxEl.style.top = (r.bottom + 8) + 'px';
+      boxEl.style.width = r.width + 'px';
+    }
+
+    function highlight(text, query) {
+      if (!query) return text;
+      const idx = text.toLowerCase().indexOf(query.toLowerCase());
+      if (idx === -1) return text;
+      return text.slice(0, idx) + '<mark style="background:rgba(232,82,26,.18);color:inherit;border-radius:3px;">' + text.slice(idx, idx + query.length) + '</mark>' + text.slice(idx + query.length);
+    }
+
+    function attachClicks() {
+      boxEl.querySelectorAll('[data-svc]').forEach(item => {
+        item.addEventListener('click', () => {
+          inputEl.value = item.getAttribute('data-svc');
+          boxEl.classList.remove('open');
+          openPopup();
+        });
+      });
+    }
+
+    function renderPopular() {
+      boxEl.innerHTML =
+        '<div class="search-suggest-label">Popular searches</div>' +
+        '<div class="search-suggest-chips">' +
+        popularSearches.map((name, i) => {
+          const s = svcList.find(x => x.name === name);
+          return '<div class="sugg-chip" data-svc="' + name.replace(/"/g,'&quot;') + '" style="animation-delay:' + (i * 45) + 'ms">' +
+            '<span class="sugg-icon" style="--sugg-bg:' + s.bg + ';--sugg-fg:' + s.fg + ';background:' + s.bg + ';color:' + s.fg + '">' + iconSvg(s.icon) + '</span>' +
+            name + '</div>';
+        }).join('') + '</div>';
+      boxEl.classList.add('open');
+      attachClicks();
+    }
+
+    function renderMatches(list, query) {
+      if (!list.length) {
+        boxEl.innerHTML = '<div class="search-suggest-empty">No matches — try “AC”, “washing machine”, “RO”…</div>';
+        boxEl.classList.add('open');
+        return;
+      }
+      boxEl.innerHTML = list.map((s, i) =>
+        '<div class="search-suggest-item" data-svc="' + s.name.replace(/"/g,'&quot;') + '" style="animation-delay:' + (i * 35) + 'ms">' +
+          '<span class="sugg-icon" style="background:' + s.bg + ';color:' + s.fg + '">' + iconSvg(s.icon) + '</span>' +
+          '<b>' + highlight(s.name, query) + '</b>' +
+          '<span class="sugg-price">' + s.price + '</span></div>'
+      ).join('');
+      boxEl.classList.add('open');
+      attachClicks();
+    }
+
+    inputEl.addEventListener('input', () => {
+      const q = inputEl.value.trim();
+      position();
+      if (!q) { renderPopular(); return; }
+      renderMatches(buildSuggestions(q), q);
+    });
+
+    inputEl.addEventListener('focus', () => {
+      position();
+      const q = inputEl.value.trim();
+      q ? renderMatches(buildSuggestions(q), q) : renderPopular();
+    });
+
+    window.addEventListener('scroll', () => { if (boxEl.classList.contains('open')) position(); }, { passive: true });
+    window.addEventListener('resize', () => { if (boxEl.classList.contains('open')) position(); });
+
+    document.addEventListener('click', (e) => {
+      if (!boxEl.contains(e.target) && e.target !== inputEl) {
+        boxEl.classList.remove('open');
+      }
+    });
+  }
+
+  wireSearchSuggest('searchInput', 'navSearchSuggest');
+  wireSearchSuggest('heroSearchInput', 'heroSearchSuggest');
+</script>
+<script>
+const searchInput = document.getElementById("heroSearch");
+
+const services = [
+    "Search for AC Repair...",
+    "Search for Refrigerator Repair...",
+    "Search for Washing Machine Repair...",
+    "Search for Microwave Repair...",
+    "Search for Water Purifier Service...",
+    "Search for Geyser Repair...",
+    "Search for TV Repair...",
+    "Search for AC Installation...",
+    "Search for AC Gas Filling..."
+];
+
+let serviceIndex = 0;
+let letterIndex = 0;
+let deleting = false;
+
+function typeWriter(){
+
+    const current = services[serviceIndex];
+
+    if(!deleting){
+
+        searchInput.placeholder = current.substring(0,letterIndex+1);
+
+        letterIndex++;
+
+        if(letterIndex === current.length){
+
+            deleting = true;
+
+            setTimeout(typeWriter,1800);
+
+            return;
+        }
+
+    }else{
+
+        searchInput.placeholder = current.substring(0,letterIndex-1);
+
+        letterIndex--;
+
+        if(letterIndex===0){
+
+            deleting=false;
+
+            serviceIndex++;
+
+            if(serviceIndex>=services.length){
+                serviceIndex=0;
+            }
+        }
+    }
+
+    setTimeout(typeWriter,deleting ? 35 : 70);
+}
+
+typeWriter();
 </script>
 </body>
 </html>
