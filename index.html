@@ -229,6 +229,16 @@
     .nav-call:hover { transform:translateY(-1px); box-shadow:0 12px 40px rgba(232,82,26,.35) !important; background:var(--brand-dark) !important; }
     .nav-call svg { width:14px; height:14px; fill:currentColor; }
 
+    .lang-switch { display:flex; gap:6px; align-items:center; margin-left:10px; flex-shrink:0; }
+    .lang-btn {
+      width:34px; height:34px; border-radius:50%;
+      border:1.5px solid var(--border); background:var(--white);
+      font-family:var(--ff-h); font-weight:800; font-size:13px; color:var(--g-600);
+      display:flex; align-items:center; justify-content:center;
+      transition:background var(--t), color var(--t), border-color var(--t);
+    }
+    .lang-btn.active { background:var(--brand); color:white; border-color:var(--brand); }
+    .lang-btn:hover:not(.active) { border-color:var(--brand); color:var(--brand); }
     .hamburger { display:none; flex-direction:column; gap:5px; padding:8px; margin-left:auto; }
     .hamburger span { width:22px; height:2px; background:var(--navy); border-radius:2px; transition:.3s; display:block; }
     .hamburger.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
@@ -1493,6 +1503,11 @@
       </a>
     </div>
 
+    <div class="lang-switch" id="langSwitch">
+      <button class="lang-btn" id="langBtnEN" onclick="setSiteLanguage('en')" aria-label="English">E</button>
+      <button class="lang-btn" id="langBtnTA" onclick="setSiteLanguage('ta')" aria-label="தமிழ்">த</button>
+    </div>
+
     <button class="hamburger" id="hamburger" onclick="toggleMenu()">
       <span></span><span></span><span></span>
     </button>
@@ -1549,7 +1564,7 @@
 
             <span class="offer-btn">Book now</span>
           </div>
-          <div class="offer-img"><img src="frontslide3.jpeg" alt="Washing machine service"></div>
+          <div class="offer-img"><img src="frontslide3.png" alt="Washing machine service"></div>
         </div>
         <div class="offer-card offer-4" onclick="openPopup()">
           <div class="offer-text">
@@ -1658,73 +1673,6 @@
 </section>
 
 <!-- ════════════════════════════════════════
-  TRUST NUMBERS STRIP
-════════════════════════════════════════ -->
-<div class="trust-strip">
-  <div class="trust-inner">
-    <div class="trust-item">
-      <span class="trust-num"><span class="counter" data-target="10000">0</span><span class="sup">+</span></span>
-      <div class="trust-label">Happy Customers</div>
-    </div>
-    <div class="trust-item">
-      <span class="trust-num"><span class="counter" data-target="2">0</span><span class="sup">+</span></span>
-      <div class="trust-label">Years Experience</div>
-    </div>
-    <div class="trust-item">
-      <span class="trust-num"><span class="counter" data-target="60">0</span><span class="sup">+</span></span>
-      <div class="trust-label">Certified Technicians</div>
-    </div>
-    <div class="trust-item">
-      <span class="trust-num">4.9<span class="sup">★</span></span>
-      <div class="trust-label">Average Rating</div>
-    </div>
-  </div>
-</div>
-
-<!-- ════════════════════════════════════════
-  HOW IT WORKS
-════════════════════════════════════════ -->
-<section class="section" id="how-it-works">
-  <div class="section-inner">
-    <div style="text-align:center;max-width:600px;margin:0 auto" class="reveal">
-      <div class="section-label"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg> Simple Process</div>
-      <h2 class="section-h">Book a Repair in<br>4 Easy Steps</h2>
-      <p class="section-p" style="margin:0 auto">From booking to repair, we've made the entire process fast, transparent, and hassle-free.</p>
-    </div>
-
-    <div class="hiw-grid">
-      <div class="hiw-card reveal" style="transition-delay:.1s">
-        <div class="hiw-step">1</div>
-        <div class="hiw-ico">📱</div>
-        <h4>Book Online or Call</h4>
-        <p>Use our website, WhatsApp, or call us directly. Select your service and preferred time slot — takes under 60 seconds.</p>
-        <div class="hiw-connector"></div>
-      </div>
-      <div class="hiw-card reveal" style="transition-delay:.2s">
-        <div class="hiw-step">2</div>
-        <div class="hiw-ico">✅</div>
-        <h4>Free Inspection</h4>
-        <p>Our certified technician arrives at your doorstep, diagnoses the problem completely free, and gives you a transparent quote.</p>
-        <div class="hiw-connector"></div>
-      </div>
-      <div class="hiw-card reveal" style="transition-delay:.3s">
-        <div class="hiw-step">3</div>
-        <div class="hiw-ico">🔧</div>
-        <h4>Expert Repair</h4>
-        <p>After your approval, our expert fixes it on the spot using genuine spare parts. Most repairs completed in a single visit.</p>
-        <div class="hiw-connector"></div>
-      </div>
-      <div class="hiw-card reveal" style="transition-delay:.4s">
-        <div class="hiw-step">4</div>
-        <div class="hiw-ico">🛡️</div>
-        <h4>Warranty & Support</h4>
-        <p>Every repair comes with a 100-day warranty. We stand by our work — if any issue recurs, we fix it free of charge.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ════════════════════════════════════════
   POPULAR SERVICES CARDS
 ════════════════════════════════════════ -->
 <section class="pop-section">
@@ -1822,6 +1770,73 @@ Includes cooling check.</p>
           </div>
           <button class="pop-cta" onclick="openPopup()">Book Now →</button>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+  TRUST NUMBERS STRIP
+════════════════════════════════════════ -->
+<div class="trust-strip">
+  <div class="trust-inner">
+    <div class="trust-item">
+      <span class="trust-num"><span class="counter" data-target="10000">0</span><span class="sup">+</span></span>
+      <div class="trust-label">Happy Customers</div>
+    </div>
+    <div class="trust-item">
+      <span class="trust-num"><span class="counter" data-target="2">0</span><span class="sup">+</span></span>
+      <div class="trust-label">Years Experience</div>
+    </div>
+    <div class="trust-item">
+      <span class="trust-num"><span class="counter" data-target="60">0</span><span class="sup">+</span></span>
+      <div class="trust-label">Certified Technicians</div>
+    </div>
+    <div class="trust-item">
+      <span class="trust-num">4.9<span class="sup">★</span></span>
+      <div class="trust-label">Average Rating</div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+  HOW IT WORKS
+════════════════════════════════════════ -->
+<section class="section" id="how-it-works">
+  <div class="section-inner">
+    <div style="text-align:center;max-width:600px;margin:0 auto" class="reveal">
+      <div class="section-label"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg> Simple Process</div>
+      <h2 class="section-h">Book a Repair in<br>4 Easy Steps</h2>
+      <p class="section-p" style="margin:0 auto">From booking to repair, we've made the entire process fast, transparent, and hassle-free.</p>
+    </div>
+
+    <div class="hiw-grid">
+      <div class="hiw-card reveal" style="transition-delay:.1s">
+        <div class="hiw-step">1</div>
+        <div class="hiw-ico">📱</div>
+        <h4>Book Online or Call</h4>
+        <p>Use our website, WhatsApp, or call us directly. Select your service and preferred time slot — takes under 60 seconds.</p>
+        <div class="hiw-connector"></div>
+      </div>
+      <div class="hiw-card reveal" style="transition-delay:.2s">
+        <div class="hiw-step">2</div>
+        <div class="hiw-ico">✅</div>
+        <h4>Free Inspection</h4>
+        <p>Our certified technician arrives at your doorstep, diagnoses the problem completely free, and gives you a transparent quote.</p>
+        <div class="hiw-connector"></div>
+      </div>
+      <div class="hiw-card reveal" style="transition-delay:.3s">
+        <div class="hiw-step">3</div>
+        <div class="hiw-ico">🔧</div>
+        <h4>Expert Repair</h4>
+        <p>After your approval, our expert fixes it on the spot using genuine spare parts. Most repairs completed in a single visit.</p>
+        <div class="hiw-connector"></div>
+      </div>
+      <div class="hiw-card reveal" style="transition-delay:.4s">
+        <div class="hiw-step">4</div>
+        <div class="hiw-ico">🛡️</div>
+        <h4>Warranty & Support</h4>
+        <p>Every repair comes with a 100-day warranty. We stand by our work — if any issue recurs, we fix it free of charge.</p>
       </div>
     </div>
   </div>
@@ -3320,6 +3335,175 @@ function typeWriter(){
 }
 
 typeWriter();
+</script>
+
+<!-- ─── LANGUAGE SWITCH ENGINE (EN / TA) — self-contained, no external service ─── -->
+<script>
+(function () {
+  const TA = {
+    "Services": "சேவைகள்",
+    "How It Works": "இது எப்படி செயல்படுகிறது",
+    "Pricing": "விலை",
+    "Reviews": "விமர்சனங்கள்",
+    "My Account": "எனது கணக்கு",
+    "Search": "தேடு",
+    "Search for AC repair, washing machine…": "AC ரிப்பேர், வாஷிங் மெஷின் தேடுங்கள்…",
+    "Call Now": "இப்போது அழையுங்கள்",
+    "Call Now – For Inspection": "இப்போது அழையுங்கள் – இன்ஸ்பெக்ஷனுக்கு",
+    "WhatsApp": "வாட்ஸ்அப்",
+    "Get a Quick Quote": "விரைவு விலைப்புள்ளி பெறுங்கள்",
+    "Tell us what's broken — we'll fix it same day!": "என்ன பழுது என்று சொல்லுங்கள் — அதே நாளில் சரி செய்கிறோம்!",
+    "Your Name": "உங்கள் பெயர்",
+    "Phone Number": "தொலைபேசி எண்",
+    "Service Needed": "தேவையான சேவை",
+    "Choose a service…": "ஒரு சேவையை தேர்வு செய்யவும்…",
+    "Preferred Date": "விருப்பமான தேதி",
+    "Preferred Time": "விருப்பமான நேரம்",
+    "Select slot…": "நேரத்தை தேர்வு செய்யவும்…",
+    "Address (With District & Area)": "முகவரி (மாவட்டம் & பகுதியுடன்)",
+    "Referral Code (optional)": "பரிந்துரை குறியீடு (விருப்பமானது)",
+    "Have a friend's code? Enter it here — get ₹100 off": "நண்பரின் குறியீடு உள்ளதா? இங்கே உள்ளிடவும் — ₹100 தள்ளுபடி",
+    "Quick check — what is 3 + 4?": "விரைவு சோதனை — 3 + 4 என்ன?",
+    "Type the answer": "பதிலை தட்டச்சு செய்யவும்",
+    "Book Inspection →": "இன்ஸ்பெக்ஷனை பதிவு செய்யுங்கள் →",
+    "Book Inspection": "இன்ஸ்பெக்ஷனை பதிவு செய்யுங்கள்",
+    "🔒 No spam · 100% Free Inspection · 90-Day Warranty": "🔒 ஸ்பேம் இல்லை · 100% இலவச இன்ஸ்பெக்ஷன் · 90-நாள் உத்தரவாதம்",
+    "Your bookings, warranty status, and referral rewards — all in one place.": "உங்கள் பதிவுகள், உத்தரவாத நிலை, பரிந்துரை வெகுமதிகள் — அனைத்தும் ஒரே இடத்தில்.",
+    "Enter the phone number you booked with": "நீங்கள் பதிவு செய்த தொலைபேசி எண்ணை உள்ளிடவும்",
+    "View": "பார்க்க",
+    "Service History": "சேவை வரலாறு",
+    "Loyalty": "லாயல்டி",
+    "Referral Program": "பரிந்துரை திட்டம்",
+    "Not you? Switch number": "நீங்கள் இல்லையா? எண்ணை மாற்றவும்",
+    "Service Preview": "சேவை முன்னோட்டம்",
+    "Offers & Discounts": "சலுகைகள் & தள்ளுபடிகள்",
+    "Offer's and Discounts": "சலுகைகள் & தள்ளுபடிகள்",
+    "Book now": "இப்போது பதிவு செய்யுங்கள்",
+    "Book Now": "இப்போது பதிவு செய்யுங்கள்",
+    "Not sure what's wrong?": "என்ன பிரச்சனை என்று தெரியவில்லையா?",
+    "What's going on with your appliance?": "உங்கள் சாதனத்தில் என்ன பிரச்சனை?",
+    "Most Booked Services": "அதிகம் பதிவு செய்யப்படும் சேவைகள்",
+    "Book a Repair in": "ரிப்பேரை பதிவு செய்யுங்கள்",
+    "Book Online or Call": "ஆன்லைனில் பதிவு செய்யவும் அல்லது அழைக்கவும்",
+    "Free Inspection": "இலவச இன்ஸ்பெக்ஷன்",
+    "Expert Repair": "நிபுணர் ரிப்பேர்",
+    "Warranty & Support": "உத்தரவாதம் & ஆதரவு",
+    "Popular Services": "பிரபலமான சேவைகள்",
+    "AC Repair & Service": "AC ரிப்பேர் & சர்வீஸ்",
+    "Washing Machine Repair": "வாஷிங் மெஷின் ரிப்பேர்",
+    "Refrigerator Service": "ரெஃப்ரிஜரேட்டர் சர்வீஸ்",
+    "Water Heater Repair": "வாட்டர் ஹீட்டர் ரிப்பேர்",
+    "RO Water Purifier": "RO வாட்டர் பியூரிஃபையர்",
+    "AC Jet wash": "AC ஜெட் வாஷ்",
+    "30 seconds to understand FixNow": "FixNow-வை 30 வினாடிகளில் புரிந்துகொள்ளுங்கள்",
+    "Why people Trusts Us": "மக்கள் ஏன் எங்களை நம்புகிறார்கள்",
+    "Certified Technicians": "சான்றளிக்கப்பட்ட டெக்னீஷியன்கள்",
+    "Free Diagnosis": "இலவச கண்டறிதல்",
+    "100-Day Warranty": "100-நாள் உத்தரவாதம்",
+    "24-Hours Response": "24-மணி நேர பதில்",
+    "Transparent Pricing": "வெளிப்படையான விலை",
+    "Genuine Parts": "மெய்யான பாகங்கள்",
+    "What Our Customers Say": "எங்கள் வாடிக்கையாளர்கள் என்ன சொல்கிறார்கள்",
+    "Frequently Asked Questions": "அடிக்கடி கேட்கப்படும் கேள்விகள்",
+    "How quickly can a technician arrive at my home?": "எவ்வளவு விரைவாக டெக்னீஷியன் என் வீட்டிற்கு வருவார்?",
+    "Is the free inspection really free? No hidden charges?": "இலவச இன்ஸ்பெக்ஷன் உண்மையில் இலவசமா? மறைமுக கட்டணம் இல்லையா?",
+    "Which appliance brands do you service?": "எந்த சாதன பிராண்டுகளுக்கு சேவை செய்கிறீர்கள்?",
+    "What does the 90-day warranty cover?": "90-நாள் உத்தரவாதத்தில் என்ன அடங்கும்?",
+    "Do you use original spare parts?": "நீங்கள் மெய்யான ஸ்பேர் பார்ட்ஸ் பயன்படுத்துகிறீர்களா?",
+    "Which cities we have cover ?": "நாங்கள் எந்த நகரங்களில் சேவை செய்கிறோம்?",
+    "What are your service hours?": "உங்கள் சேவை நேரங்கள் என்ன?",
+    "How can I pay? Do you accept UPI?": "நான் எப்படி பணம் செலுத்தலாம்? UPI ஏற்கிறீர்களா?",
+    "Book Any Repair in": "எந்த ரிப்பேரையும் பதிவு செய்யுங்கள்",
+    "Ready to Get Your Appliance Fixed?": "உங்கள் சாதனத்தை சரி செய்ய தயாரா?",
+    "Company": "நிறுவனம்",
+    "Contact": "தொடர்பு"
+  };
+
+  const SKIP_TAGS = new Set(['SCRIPT','STYLE','NOSCRIPT','TEXTAREA','TITLE']);
+  const origText = new WeakMap();      // text node -> original English string
+  const origPlaceholder = new WeakMap(); // input/textarea -> original placeholder
+  let currentLang = 'en';
+
+  function walkTextNodes(root, cb) {
+    const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+      acceptNode(node) {
+        const p = node.parentNode;
+        if (!p || SKIP_TAGS.has(p.tagName)) return NodeFilter.FILTER_REJECT;
+        return NodeFilter.FILTER_ACCEPT;
+      }
+    });
+    let n;
+    while ((n = walker.nextNode())) cb(n);
+  }
+
+  function applyLangToNode(node, lang) {
+    const raw = node.nodeValue;
+    const trimmed = raw.trim();
+    if (!trimmed) return;
+    if (!origText.has(node)) origText.set(node, raw);
+    const original = origText.get(node);
+    const originalTrimmed = original.trim();
+    if (lang === 'ta') {
+      const t = TA[originalTrimmed];
+      if (t) {
+        node.nodeValue = raw.replace(originalTrimmed, t);
+      }
+    } else {
+      node.nodeValue = original;
+    }
+  }
+
+  function applyLangToPlaceholders(root, lang) {
+    root.querySelectorAll('input[placeholder], textarea[placeholder]').forEach(el => {
+      if (!origPlaceholder.has(el)) origPlaceholder.set(el, el.placeholder);
+      const original = origPlaceholder.get(el);
+      if (lang === 'ta') {
+        const t = TA[original.trim()];
+        if (t) el.placeholder = t;
+      } else {
+        el.placeholder = original;
+      }
+    });
+  }
+
+  function applyLang(root, lang) {
+    walkTextNodes(root, (n) => applyLangToNode(n, lang));
+    applyLangToPlaceholders(root, lang);
+  }
+
+  function markActiveLangBtn(lang) {
+    const en = document.getElementById('langBtnEN');
+    const ta = document.getElementById('langBtnTA');
+    if (!en || !ta) return;
+    en.classList.toggle('active', lang === 'en');
+    ta.classList.toggle('active', lang === 'ta');
+  }
+
+  window.setSiteLanguage = function (lang) {
+    currentLang = lang;
+    applyLang(document.body, lang);
+    markActiveLangBtn(lang);
+    try { localStorage.setItem('fixnow_lang', lang); } catch (e) {}
+  };
+
+  // Keep translating anything added later (popups, search suggestions, dynamic cards)
+  const mo = new MutationObserver((mutations) => {
+    if (currentLang !== 'ta') return;
+    mutations.forEach(m => {
+      m.addedNodes.forEach(node => {
+        if (node.nodeType === 1) applyLang(node, 'ta');
+        else if (node.nodeType === 3) applyLangToNode(node, 'ta');
+      });
+    });
+  });
+  mo.observe(document.body, { childList: true, subtree: true });
+
+  window.addEventListener('DOMContentLoaded', function () {
+    let saved = 'en';
+    try { saved = localStorage.getItem('fixnow_lang') || 'en'; } catch (e) {}
+    setSiteLanguage(saved);
+  });
+})();
 </script>
 </body>
 </html>
