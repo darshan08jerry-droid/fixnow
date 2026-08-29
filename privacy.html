@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy | FixNow Home Care</title>
+<meta name="description" content="FixNow Home Care Privacy Policy — how we collect, use, and protect your information.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;1,9..40,400&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --brand:       #121812;
+    --brand-dark:  #C43F0E;
+    --brand-light: rgb(204, 163, 76);
+    --navy:        #25242b;
+    --g-50:        #F8F8F8;
+    --g-100:       #F0F0F0;
+    --g-200:       #E2E2E2;
+    --g-400:       #9A9A9A;
+    --g-600:       #5A5A5A;
+    --text:        #000000;
+    --text-soft:   #5A5A6E;
+    --text-muted:  #9A9AB0;
+    --border:      #EBEBF0;
+    --r:           16px;
+    --r-lg:        22px;
+    --r-full:      9999px;
+    --sh:          0 4px 24px rgba(29,27,27,.08);
+    --t:           .25s cubic-bezier(.4,0,.2,1);
+    --ff-h:        'Nunito', sans-serif;
+    --ff-b:        'DM Sans', sans-serif;
+    --max:         880px;
+  }
+  *,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
+  html { scroll-behavior:smooth; }
+  body { font-family:var(--ff-b); color:var(--text); background:var(--g-50); -webkit-font-smoothing:antialiased; line-height:1.7; }
+  a { text-decoration:none; color:var(--brand-dark); }
+  a:hover { text-decoration:underline; }
+  ul { list-style:none; }
+
+  nav { background:white; position:sticky; top:0; z-index:400; border-bottom:1px solid var(--border); }
+  .nav-inner { max-width:var(--max); margin:auto; padding:0 24px; height:72px; display:flex; align-items:center; justify-content:space-between; }
+  .logo { display:flex; align-items:center; gap:10px; }
+  .logo-mark { width:38px; height:38px; border-radius:10px; background:var(--brand); display:flex; align-items:center; justify-content:center; color:white; font-family:var(--ff-h); font-weight:800; }
+  .logo-text strong { font-family:var(--ff-h); font-size:17px; display:block; line-height:1.1; }
+  .logo-text em { font-style:normal; font-size:11px; color:var(--text-muted); }
+  .back-link { font-size:13.5px; font-weight:700; color:var(--brand-dark); display:flex; align-items:center; gap:6px; }
+  .back-link svg { width:14px; height:14px; fill:none; stroke:currentColor; stroke-width:2.4; }
+
+  header.hero { max-width:var(--max); margin:auto; padding:56px 24px 24px; }
+  header.hero h1 { font-family:var(--ff-h); font-size:38px; font-weight:900; color:var(--brand); margin-bottom:10px; }
+  header.hero p.meta { font-size:13.5px; color:var(--text-muted); }
+
+  main { max-width:var(--max); margin:auto; padding:0 24px 80px; }
+  .card { background:white; border:1px solid var(--border); border-radius:var(--r-lg); padding:40px 44px; box-shadow:var(--sh); }
+  .card h2 { font-family:var(--ff-h); font-size:21px; font-weight:800; color:var(--brand); margin:34px 0 12px; padding-top:18px; border-top:1px solid var(--border); }
+  .card h2:first-of-type { margin-top:0; padding-top:0; border-top:none; }
+  .card p { font-size:15px; color:var(--text-soft); margin-bottom:12px; }
+  .card ul { margin:8px 0 16px 0; }
+  .card ul li { font-size:15px; color:var(--text-soft); padding-left:22px; position:relative; margin-bottom:8px; }
+  .card ul li::before { content:"›"; position:absolute; left:2px; color:var(--brand-dark); font-weight:800; }
+  .card strong { color:var(--text); }
+  .callout { background:var(--g-50); border:1px solid var(--border); border-radius:var(--r); padding:18px 20px; margin:18px 0; font-size:14px; color:var(--text-soft); }
+  .callout a { font-weight:700; }
+  .contact-box { margin-top:8px; background:var(--brand); color:rgba(255,255,255,.9); border-radius:var(--r); padding:24px 26px; }
+  .contact-box strong { color:white; }
+  .contact-box a { color:var(--brand-light); }
+  .toc { display:flex; flex-wrap:wrap; gap:8px 10px; margin:24px 0 8px; }
+  .toc a { font-size:12.5px; font-weight:700; background:var(--g-50); border:1px solid var(--border); color:var(--text-soft); padding:6px 12px; border-radius:var(--r-full); }
+  .toc a:hover { color:var(--brand-dark); border-color:var(--brand-dark); text-decoration:none; }
+
+  footer { background:var(--navy); color:rgba(255,255,255,.55); padding:40px 24px; margin-top:40px; }
+  .footer-inner { max-width:var(--max); margin:auto; display:flex; flex-wrap:wrap; gap:16px; align-items:center; justify-content:space-between; font-size:13px; }
+  .footer-inner a { color:rgba(255,255,255,.75); }
+  .footer-links { display:flex; gap:18px; flex-wrap:wrap; }
+
+  @media (max-width:640px){
+    header.hero h1 { font-size:28px; }
+    .card { padding:28px 22px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="logo" href="index.html">
+      <div class="logo-mark">F</div>
+      <div class="logo-text"><strong>FixNow</strong><em>Home Care · Tamilnadu</em></div>
+    </a>
+    <a class="back-link" href="index.html"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Back to home</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <h1>Privacy Policy</h1>
+  <p class="meta">FixNow Home Care · Effective date: 29 August 2026 · Last updated: 29 August 2026</p>
+  <div class="toc">
+    <a href="#collect">Information we collect</a>
+    <a href="#use">How we use it</a>
+    <a href="#face">Face verification</a>
+    <a href="#share">Sharing</a>
+    <a href="#retention">Retention</a>
+    <a href="#security">Security</a>
+    <a href="#choices">Your choices</a>
+    <a href="#deletion">Account deletion</a>
+    <a href="#contact">Contact</a>
+  </div>
+</header>
+
+<main>
+  <div class="card">
+    <p>FixNow Home Care ("FixNow", "we", "our", or "us") provides appliance repair booking, technician assignment, attendance, service tracking, estimates, billing, and related support through the FixNow mobile application and website at <a href="https://fixnow.live">fixnow.live</a>.</p>
+    <p>This Privacy Policy explains what information FixNow collects, why we collect it, how it is used, and the choices available to users.</p>
+
+    <h2 id="collect">1. Information we collect</h2>
+    <p>Depending on whether you use FixNow as a customer, technician, administrator, or business representative, we may collect:</p>
+    <p><strong>Account and contact information</strong></p>
+    <ul>
+      <li>Name</li>
+      <li>Email address</li>
+      <li>Mobile number</li>
+      <li>Login and account identifiers</li>
+      <li>User role and branch assignment</li>
+      <li>Profile information</li>
+    </ul>
+    <p><strong>Customer and service information</strong></p>
+    <ul>
+      <li>Service address and landmark</li>
+      <li>Appliance and reported problem</li>
+      <li>Booking date and preferred time</li>
+      <li>Booking status and service history</li>
+      <li>Estimates, approvals, bills, taxes, payments, and collection records</li>
+      <li>Ratings, reviews, complaints, and support messages</li>
+      <li>Photographs uploaded in connection with a service request</li>
+    </ul>
+    <p><strong>Technician information</strong></p>
+    <ul>
+      <li>Employment and branch details</li>
+      <li>Assigned jobs and job status</li>
+      <li>Attendance records</li>
+      <li>Earnings and incentive records</li>
+      <li>Technician availability and work status</li>
+      <li>Attendance selfies and face-reference images</li>
+      <li>Image-derived face-reference signatures, verification results, and comparison scores</li>
+    </ul>
+    <p><strong>Location information</strong></p>
+    <p>For customers, location may be used when they choose a service address, move a map pin, or permit the app to use their current location.</p>
+    <p>For technicians, FixNow may collect precise location during an active workday to support: attendance and location confirmation, technician dispatch and job assignment, live technician tracking, route and travel-history records, customer arrival estimates, and safety, operational monitoring, and investigation of suspected misuse.</p>
+    <p>When a technician gives permission and starts work tracking, location may be collected in the background, including when the app is minimized, closed, or not actively in use. During active tracking, the app may record technician location approximately once per minute.</p>
+    <p>Technician location may be visible to authorized FixNow administrators. Customers may receive relevant live-location or arrival information for their active booking. Location is not collected for advertising.</p>
+    <p><strong>Device and technical information</strong></p>
+    <ul>
+      <li>Device and operating-system information</li>
+      <li>App version</li>
+      <li>Firebase installation and notification tokens</li>
+      <li>IP address and basic server logs</li>
+      <li>Error, security, and diagnostic information</li>
+      <li>Permission and notification status</li>
+    </ul>
+
+    <h2 id="use">2. How we use information</h2>
+    <p>FixNow uses collected information to:</p>
+    <ul>
+      <li>Create and manage accounts</li>
+      <li>Authenticate users and prevent unauthorized access</li>
+      <li>Create and manage service bookings</li>
+      <li>Assign and dispatch technicians</li>
+      <li>Provide live tracking and arrival updates</li>
+      <li>Confirm attendance and work activity</li>
+      <li>Create estimates, bills, and service records</li>
+      <li>Process customer and administrator approvals</li>
+      <li>Send booking, job, and operational notifications</li>
+      <li>Provide customer support</li>
+      <li>Investigate fraud, false attendance, misuse, and safety incidents</li>
+      <li>Calculate technician performance, earnings, and incentives</li>
+      <li>Maintain accounting, tax, and operational records</li>
+      <li>Improve application reliability and service quality</li>
+      <li>Comply with legal and regulatory obligations</li>
+    </ul>
+    <div class="callout">FixNow does not sell personal information or precise location data. We do not use technician background location for advertising.</div>
+
+    <h2 id="face">3. Face-reference and attendance information</h2>
+    <p>Technicians may be asked to provide a reference selfie and attendance selfies. FixNow uses these images and image-derived comparison information to verify attendance and reduce impersonation or false attendance.</p>
+    <p>Attendance selfies, verification results, and face-reference information may be reviewed by authorized administrators. This information is used only for attendance, identity verification, fraud prevention, and operational investigations.</p>
+    <p>Technicians may contact FixNow to request correction or deletion of face-reference information, subject to legitimate attendance, investigation, employment, and legal record-retention requirements.</p>
+
+    <h2 id="share">4. How information is shared</h2>
+    <p>Information may be shared only as necessary with:</p>
+    <ul>
+      <li>Customers, technicians, administrators, and branch personnel involved in a booking</li>
+      <li>Cloud hosting, authentication, database, storage, notification, mapping, geocoding, routing, and technical-support providers</li>
+      <li>Professional advisers, auditors, or insurers when reasonably necessary</li>
+      <li>Government authorities or law-enforcement agencies when required by law</li>
+      <li>A successor entity if the FixNow business is reorganized, merged, or transferred</li>
+    </ul>
+    <p>FixNow currently uses services that may include Google Firebase, Google mapping or address services, OpenStreetMap-related mapping or geocoding services, and cloud-hosting providers. These providers may process limited information according to their own privacy terms.</p>
+
+    <h2 id="retention">5. Data retention</h2>
+    <p>We retain information only for as long as reasonably necessary for the purposes described in this policy.</p>
+    <ul>
+      <li>Active account information is retained while the account remains active.</li>
+      <li>Booking, invoice, tax, payment, and service records may be retained for the period required by applicable accounting, tax, warranty, dispute, and legal obligations.</li>
+      <li>Technician attendance and route history may be retained for operational, payroll, safety, fraud-prevention, and dispute-resolution purposes.</li>
+      <li>Location information that is no longer required may be deleted or anonymized.</li>
+      <li>Information connected to an investigation or legal dispute may be retained until the matter is resolved.</li>
+    </ul>
+    <p>Deleting an account does not require FixNow to delete records that must legally be retained or are necessary to prevent fraud, settle payments, maintain invoices, or resolve disputes.</p>
+
+    <h2 id="security">6. Security</h2>
+    <p>FixNow uses reasonable technical and organizational safeguards, including authenticated access, role-based permissions, protected cloud storage, and restricted administrator access.</p>
+    <p>No internet-based system is completely secure. Users must protect their passwords and immediately report suspected unauthorized access.</p>
+
+    <h2 id="choices">7. User choices and rights</h2>
+    <p>Users may:</p>
+    <ul>
+      <li>Review and update available profile information</li>
+      <li>Refuse optional permissions</li>
+      <li>Disable location permission through device settings</li>
+      <li>Stop technician tracking by ending the work session or signing out, subject to workplace requirements</li>
+      <li>Request access, correction, or deletion of personal information</li>
+      <li>Withdraw consent where processing is based on consent</li>
+      <li>Raise a privacy complaint</li>
+    </ul>
+    <p>Disabling required permissions may prevent attendance, tracking, dispatch, or other essential features from working.</p>
+
+    <h2 id="deletion">8. Account and data deletion</h2>
+    <p>To request account deletion, visit <a href="delete-account.html">fixnow.live/delete-account</a>.</p>
+    <p>You may also email <a href="mailto:fixnowcoimbatore@gmail.com">fixnowcoimbatore@gmail.com</a> using the email associated with your FixNow account. Include your name, registered mobile number, account role, and the words "Account Deletion Request".</p>
+    <p>We may verify your identity before processing the request. Requests are normally processed within 30 days, except where information must be retained for legal, billing, fraud-prevention, employment, safety, or dispute-resolution purposes.</p>
+
+    <h2>9. Children</h2>
+    <p>FixNow is intended for adults and authorized service professionals. It is not directed to children under 18. We do not knowingly create technician accounts for children.</p>
+
+    <h2>10. Changes to this policy</h2>
+    <p>We may update this Privacy Policy when our services, legal obligations, or data practices change. The revised policy will display a new "Last updated" date.</p>
+    <p>Material changes may also be communicated through the app or other appropriate channels.</p>
+
+    <h2 id="contact">11. Contact us</h2>
+    <p>For privacy questions, complaints, correction requests, or deletion requests:</p>
+    <div class="contact-box">
+      <strong>FixNow Home Care</strong><br>
+      Tamil Nadu, India<br>
+      Email: <a href="mailto:fixnowcoimbatore@gmail.com">fixnowcoimbatore@gmail.com</a><br>
+      Phone/WhatsApp: <a href="tel:+918098606019">+91 80986 06019</a><br>
+      Website: <a href="https://fixnow.live">https://fixnow.live</a>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <span>© 2026 FixNow Home Care. All rights reserved. Tamil Nadu, India.</span>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="terms.html">Terms &amp; Conditions</a>
+      <a href="delete-account.html">Delete Account</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

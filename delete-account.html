@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Account and Data Deletion | FixNow Home Care</title>
+<meta name="description" content="How to request deletion of your FixNow Home Care account and personal information.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;1,9..40,400&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --brand:       #121812;
+    --brand-dark:  #C43F0E;
+    --brand-light: rgb(204, 163, 76);
+    --navy:        #25242b;
+    --g-50:        #F8F8F8;
+    --g-100:       #F0F0F0;
+    --g-200:       #E2E2E2;
+    --g-400:       #9A9A9A;
+    --g-600:       #5A5A5A;
+    --green:       #16A34A;
+    --green-light: #F0FDF4;
+    --text:        #000000;
+    --text-soft:   #5A5A6E;
+    --text-muted:  #9A9AB0;
+    --border:      #EBEBF0;
+    --r:           16px;
+    --r-lg:        22px;
+    --r-full:      9999px;
+    --sh:          0 4px 24px rgba(29,27,27,.08);
+    --sh-brand:    0 8px 32px rgba(196,63,14,.28);
+    --t:           .25s cubic-bezier(.4,0,.2,1);
+    --ff-h:        'Nunito', sans-serif;
+    --ff-b:        'DM Sans', sans-serif;
+    --max:         880px;
+  }
+  *,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
+  html { scroll-behavior:smooth; }
+  body { font-family:var(--ff-b); color:var(--text); background:var(--g-50); -webkit-font-smoothing:antialiased; line-height:1.7; }
+  a { text-decoration:none; color:var(--brand-dark); }
+  a:hover { text-decoration:underline; }
+  ul { list-style:none; }
+  button { font-family:var(--ff-b); cursor:pointer; border:none; }
+
+  nav { background:white; position:sticky; top:0; z-index:400; border-bottom:1px solid var(--border); }
+  .nav-inner { max-width:var(--max); margin:auto; padding:0 24px; height:72px; display:flex; align-items:center; justify-content:space-between; }
+  .logo { display:flex; align-items:center; gap:10px; }
+  .logo-mark { width:38px; height:38px; border-radius:10px; background:var(--brand); display:flex; align-items:center; justify-content:center; color:white; font-family:var(--ff-h); font-weight:800; }
+  .logo-text strong { font-family:var(--ff-h); font-size:17px; display:block; line-height:1.1; }
+  .logo-text em { font-style:normal; font-size:11px; color:var(--text-muted); }
+  .back-link { font-size:13.5px; font-weight:700; color:var(--brand-dark); display:flex; align-items:center; gap:6px; }
+  .back-link svg { width:14px; height:14px; fill:none; stroke:currentColor; stroke-width:2.4; }
+
+  header.hero { max-width:var(--max); margin:auto; padding:56px 24px 24px; }
+  header.hero h1 { font-family:var(--ff-h); font-size:38px; font-weight:900; color:var(--brand); margin-bottom:10px; }
+  header.hero p.meta { font-size:15px; color:var(--text-soft); max-width:640px; }
+
+  main { max-width:var(--max); margin:auto; padding:0 24px 80px; }
+  .card { background:white; border:1px solid var(--border); border-radius:var(--r-lg); padding:40px 44px; box-shadow:var(--sh); margin-bottom:24px; }
+  .card h2 { font-family:var(--ff-h); font-size:21px; font-weight:800; color:var(--brand); margin-bottom:14px; }
+  .card p { font-size:15px; color:var(--text-soft); margin-bottom:12px; }
+  .card ul { margin:8px 0 4px 0; }
+  .card ul li { font-size:15px; color:var(--text-soft); padding-left:22px; position:relative; margin-bottom:8px; }
+  .card ul li::before { content:"›"; position:absolute; left:2px; color:var(--brand-dark); font-weight:800; }
+  .card strong { color:var(--text); }
+
+  .steps { display:flex; flex-direction:column; gap:18px; }
+  .step { display:flex; gap:16px; align-items:flex-start; }
+  .step-num { flex-shrink:0; width:34px; height:34px; border-radius:50%; background:var(--brand); color:white; display:flex; align-items:center; justify-content:center; font-family:var(--ff-h); font-weight:800; font-size:15px; }
+  .step-body h3 { font-family:var(--ff-h); font-size:16px; font-weight:800; margin-bottom:4px; }
+  .step-body p { font-size:14.5px; color:var(--text-soft); margin-bottom:0; }
+  .step-body code { background:var(--g-50); border:1px solid var(--border); border-radius:6px; padding:2px 8px; font-size:13.5px; }
+
+  .subject-box { background:var(--g-50); border:1px dashed var(--g-400); border-radius:var(--r); padding:14px 18px; font-size:14px; color:var(--text-soft); margin:10px 0 4px; font-family:monospace; }
+
+  .cta-row { display:flex; flex-wrap:wrap; gap:14px; margin-top:8px; }
+  .btn { display:inline-flex; align-items:center; gap:8px; padding:14px 26px; border-radius:var(--r-full); font-weight:700; font-size:14.5px; transition:transform var(--t); }
+  .btn-primary { background:var(--brand-dark); color:white; box-shadow:var(--sh-brand); text-decoration:none; }
+  .btn-primary:hover { transform:translateY(-2px); text-decoration:none; }
+  .btn-outline { background:white; border:1.5px solid var(--border); color:var(--text); text-decoration:none; }
+  .btn-outline:hover { border-color:var(--brand-dark); color:var(--brand-dark); transform:translateY(-2px); text-decoration:none; }
+
+  .callout { background:var(--green-light); border:1px solid #bbf0cf; border-radius:var(--r); padding:18px 20px; margin-top:18px; font-size:14px; color:#166534; }
+
+  .toc { display:flex; flex-wrap:wrap; gap:8px 10px; margin:24px 0 8px; }
+  .toc a { font-size:12.5px; font-weight:700; background:var(--g-50); border:1px solid var(--border); color:var(--text-soft); padding:6px 12px; border-radius:var(--r-full); }
+  .toc a:hover { color:var(--brand-dark); border-color:var(--brand-dark); text-decoration:none; }
+
+  .contact-box { margin-top:8px; background:var(--brand); color:rgba(255,255,255,.9); border-radius:var(--r); padding:24px 26px; }
+  .contact-box strong { color:white; }
+  .contact-box a { color:var(--brand-light); }
+
+  footer { background:var(--navy); color:rgba(255,255,255,.55); padding:40px 24px; margin-top:40px; }
+  .footer-inner { max-width:var(--max); margin:auto; display:flex; flex-wrap:wrap; gap:16px; align-items:center; justify-content:space-between; font-size:13px; }
+  .footer-inner a { color:rgba(255,255,255,.75); }
+  .footer-links { display:flex; gap:18px; flex-wrap:wrap; }
+
+  @media (max-width:640px){
+    header.hero h1 { font-size:28px; }
+    .card { padding:28px 22px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="logo" href="index.html">
+      <div class="logo-mark">F</div>
+      <div class="logo-text"><strong>FixNow</strong><em>Home Care · Tamilnadu</em></div>
+    </a>
+    <a class="back-link" href="index.html"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Back to home</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <h1>Account and Data Deletion</h1>
+  <p class="meta">FixNow users may request deletion of their account and associated personal information. Here's how, and what happens next.</p>
+  <div class="toc">
+    <a href="#how">How to request deletion</a>
+    <a href="#next">What happens next</a>
+    <a href="#retained">Information that may be retained</a>
+  </div>
+</header>
+
+<main>
+  <div class="card" id="how">
+    <h2>How to request deletion</h2>
+    <p>Send an email to <a href="mailto:fixnowcoimbatore@gmail.com">fixnowcoimbatore@gmail.com</a> from the email address registered with your FixNow account.</p>
+    <p>Use the subject:</p>
+    <div class="subject-box">FixNow Account Deletion Request</div>
+    <p>Include:</p>
+    <ul>
+      <li>Full name</li>
+      <li>Registered email address</li>
+      <li>Registered mobile number</li>
+      <li>Account role: customer, technician, administrator, or other</li>
+      <li>A clear request to delete the account</li>
+    </ul>
+    <p>You may also contact <a href="tel:+918098606019">+91 80986 06019</a> for assistance.</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="mailto:fixnowcoimbatore@gmail.com?subject=FixNow%20Account%20Deletion%20Request&body=Full%20name%3A%0ARegistered%20email%20address%3A%0ARegistered%20mobile%20number%3A%0AAccount%20role%20(customer%2Ftechnician%2Fadministrator%2Fother)%3A%0A%0AI%20am%20requesting%20deletion%20of%20my%20FixNow%20account%20and%20associated%20personal%20information.">Email a deletion request</a>
+      <a class="btn btn-outline" href="https://wa.me/918098606019?text=Hi%20FixNow%2C%20I%27d%20like%20to%20request%20deletion%20of%20my%20account.">WhatsApp us</a>
+    </div>
+  </div>
+
+  <div class="card" id="next">
+    <h2>What happens next</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <h3>Identity verification</h3>
+          <p>FixNow may contact you to verify your identity before processing the request.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h3>Account disabled or deleted</h3>
+          <p>Your account will be disabled or deleted after verification.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <h3>Data removed where possible</h3>
+          <p>Information that is no longer required will be deleted or anonymized.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <h3>Processing time</h3>
+          <p>Requests are normally processed within 30 days.</p>
+        </div>
+      </div>
+    </div>
+    <div class="callout">You'll receive a confirmation once your request has been processed. If you have any questions in the meantime, reach out to <a href="mailto:fixnowcoimbatore@gmail.com">fixnowcoimbatore@gmail.com</a>.</div>
+  </div>
+
+  <div class="card" id="retained">
+    <h2>Information that may be retained</h2>
+    <p>FixNow may retain limited records where required for:</p>
+    <ul>
+      <li>Bills, tax, accounting, and payment records</li>
+      <li>Completed service history and warranties</li>
+      <li>Technician attendance, payroll, and employment records</li>
+      <li>Fraud prevention and security investigations</li>
+      <li>Pending complaints, disputes, or legal claims</li>
+      <li>Compliance with applicable law</li>
+    </ul>
+    <p>Retained information will remain protected and will not be used for unrelated purposes.</p>
+    <p>See our full <a href="privacy.html">Privacy Policy</a> for more detail on how we handle your data.</p>
+  </div>
+
+  <div class="card">
+    <h2>Contact</h2>
+    <div class="contact-box">
+      <strong>FixNow Home Care</strong><br>
+      Tamil Nadu, India<br>
+      Email: <a href="mailto:fixnowcoimbatore@gmail.com">fixnowcoimbatore@gmail.com</a><br>
+      Phone/WhatsApp: <a href="tel:+918098606019">+91 80986 06019</a><br>
+      Website: <a href="https://fixnow.live">https://fixnow.live</a>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <span>© 2026 FixNow Home Care. All rights reserved. Tamil Nadu, India.</span>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms &amp; Conditions</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
